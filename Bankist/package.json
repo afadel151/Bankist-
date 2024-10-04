@@ -19,7 +19,13 @@
     },
     "dependencies": {
         "@primevue/themes": "^4.0.7",
+        "@vueuse/motion": "^2.2.5",
+        "aos": "^2.3.4",
         "primeicons": "^7.0.0",
-        "primevue": "^4.0.7"
+        "primevue": "^4.0.7",
+        "taos": "^1.0.5",
+        "typewriter-effect": "^2.21.0",
+        "typewriter-vue": "^0.5.19",
+        "vue-typer": "^1.2.0"
     }
 }

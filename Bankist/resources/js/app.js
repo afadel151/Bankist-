@@ -7,6 +7,7 @@ import { createInertiaApp } from '@inertiajs/vue3';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import { createApp, h } from 'vue';
 import { ZiggyVue } from '../../vendor/tightenco/ziggy';
+import { MotionPlugin } from '@vueuse/motion'
 import AnimateOnScroll from 'primevue/animateonscroll';
 
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
@@ -22,17 +23,17 @@ createInertiaApp({
         return createApp({ render: () => h(App, props) })
             .use(plugin)
             .use(ZiggyVue)
+            .directive('animateonscroll', AnimateOnScroll)
             .use(PrimeVue, {
                 theme: {
                     preset: Aura,
                     options: {
                         prefix: 'p',
                         darkModeSelector: 'system',
-                        cssLayer: false
+                        cssLayer: true
                     }
                 }
             })
-            .directive('animateonscroll', AnimateOnScroll)
             .mount(el);
     },
     progress: {
