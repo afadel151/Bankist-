@@ -118,7 +118,7 @@ const responsiveOptions = ref([
     </div>
   </header>
 
-  <section class="px-[15rem] py-[3rem] border-t-[#ddd] border-t-[1px] transition-opacity section" id="section--1">
+  <section class="px-[20rem] py-[10rem] border-t-[#ddd] border-t-[1px] transition-opacity section" id="section--1">
     <div data-aos="fade-up"  class="section__title">
       <h2 class="section__description">Features</h2>
       <h3 class="section__header">
@@ -168,7 +168,7 @@ const responsiveOptions = ref([
     </div>
   </section>
 
-  <section  class="px-[15rem] py-[3rem] section" id="section--2">
+  <section  class=" py-[10rem] border-t-2 section" id="section--2">
     <div data-aos="fade-up" data-aos-duration="1500"    class="section__title">
       <h2 class="section__description">Operations</h2>
       <h3 class="section__header">
@@ -235,7 +235,7 @@ const responsiveOptions = ref([
     
   </section>
 
-  <section data-aos="fade-up" data-aos-duration="1500"  class="px-[15rem] py-[3rem] section" id="section--3">
+  <section data-aos="fade-up" data-aos-duration="1500"  class=" py-[10rem] border-t-2 section" id="section--3">
     <div data-aos="fade-up" data-aos-duration="1500" class="section__title section__title--testimonials">
       <h2   class="section__description">Not sure yet?</h2>
       <h3 class="section__header">
@@ -244,7 +244,7 @@ const responsiveOptions = ref([
     </div>
     <div class="flex justify-center items-center w-screen">
       <Carousel data-aos="fade-up" data-aos-duration="2000" :value="testimonals" :numVisible="1" class="w-[50%]" :numScroll="1" :responsiveOptions="responsiveOptions">
-      <template class="testimonal" #item="slotProps">
+      <template  #item="slotProps">
         <div class="mx-28 my-16 testimonial">
         
           <h5 class="testimonial__header">{{slotProps.data.testimonal_summary}}</h5>
@@ -332,7 +332,7 @@ const responsiveOptions = ref([
     </div> -->
   </section>
 
-  <section data-aos="fade-up" data-aos-duration="1500"  class="px-[15rem] py-[3rem] section section--sign-up">
+  <section data-aos="fade-up" data-aos-duration="1500"  class=" py-[3rem] section section--sign-up">
     <div data-aos="fade-up" data-aos-duration="3000"  class="section__title">
       <h3 class="section__header">
         The best day to join Bankist was one year ago. The second best is

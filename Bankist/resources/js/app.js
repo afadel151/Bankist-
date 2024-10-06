@@ -9,9 +9,9 @@ import { createApp, h } from 'vue';
 import { ZiggyVue } from '../../vendor/tightenco/ziggy';
 import { MotionPlugin } from '@vueuse/motion'
 import AnimateOnScroll from 'primevue/animateonscroll';
-
+import Ripple from 'primevue/ripple';
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
-
+import StyleClass from 'primevue/styleclass';
 createInertiaApp({
     title: (title) => `${title} - ${appName}`,
     resolve: (name) =>
@@ -23,17 +23,20 @@ createInertiaApp({
         return createApp({ render: () => h(App, props) })
             .use(plugin)
             .use(ZiggyVue)
-            .directive('animateonscroll', AnimateOnScroll)
+            
             .use(PrimeVue, {
                 theme: {
                     preset: Aura,
                     options: {
                         prefix: 'p',
                         darkModeSelector: 'system',
-                        cssLayer: true
+                        cssLayer: false
                     }
-                }
+                },
             })
+            .directive('animateonscroll', AnimateOnScroll)
+            .directive('ripple', Ripple)
+            .directive('styleclass', StyleClass)
             .mount(el);
     },
     progress: {
