@@ -9,6 +9,7 @@ import Carousel from 'primevue/carousel';
 import { ref , onMounted} from 'vue';
 import Typewriter from 'typewriter-effect/dist/core';
 const typewriterRef = ref(null); 
+import OpenAccount from '@/Components/OpenAccount.vue';
 onMounted(() => {
       const typewriter = new Typewriter(typewriterRef.value, {
         loop: true,       // Repeat the typewriter effect
@@ -83,10 +84,8 @@ const responsiveOptions = ref([
 ]); 
 </script>
 
-<template>
-  
-
-<header class="header">
+<template >
+<header class="bg-[#f2f2f2] backdrop-opacity-lg font-bold text-xl header">
     <nav class="nav">
       <img data-aos="fade-up-right" src="/imgs/logo.png" alt="Bankist logo" class="nav__logo" id="logo" />
       <ul class="nav__links">
@@ -100,12 +99,12 @@ const responsiveOptions = ref([
           <a class="nav__link" href="#section--3">Testimonials</a>
         </li>
         <li class="nav__item">
-          <a class="btn--show-modal nav__link nav__link--btn" href="#">Open account</a>
+          <OpenAccount />
         </li>
       </ul>
     </nav>
-    <div class="header__title">
-      <h1>
+    <div class="text-[10px] header__title">
+      <h1 class="text-[50px]">
         When
         <span class="highlight">banking</span>
         meets<br />
@@ -119,7 +118,7 @@ const responsiveOptions = ref([
     </div>
   </header>
 
-  <section class="section" id="section--1">
+  <section class="px-[15rem] py-[3rem] border-t-[#ddd] border-t-[1px] transition-opacity section" id="section--1">
     <div data-aos="fade-up"  class="section__title">
       <h2 class="section__description">Features</h2>
       <h3 class="section__header">
@@ -169,7 +168,7 @@ const responsiveOptions = ref([
     </div>
   </section>
 
-  <section  class="section" id="section--2">
+  <section  class="px-[15rem] py-[3rem] section" id="section--2">
     <div data-aos="fade-up" data-aos-duration="1500"    class="section__title">
       <h2 class="section__description">Operations</h2>
       <h3 class="section__header">
@@ -236,7 +235,7 @@ const responsiveOptions = ref([
     
   </section>
 
-  <section data-aos="fade-up" data-aos-duration="1500"  class="section" id="section--3">
+  <section data-aos="fade-up" data-aos-duration="1500"  class="px-[15rem] py-[3rem] section" id="section--3">
     <div data-aos="fade-up" data-aos-duration="1500" class="section__title section__title--testimonials">
       <h2   class="section__description">Not sure yet?</h2>
       <h3 class="section__header">
@@ -333,7 +332,7 @@ const responsiveOptions = ref([
     </div> -->
   </section>
 
-  <section data-aos="fade-up" data-aos-duration="1500"  class="section section--sign-up">
+  <section data-aos="fade-up" data-aos-duration="1500"  class="px-[15rem] py-[3rem] section section--sign-up">
     <div data-aos="fade-up" data-aos-duration="3000"  class="section__title">
       <h3 class="section__header">
         The best day to join Bankist was one year ago. The second best is
@@ -446,25 +445,21 @@ const responsiveOptions = ref([
 }
 
 html {
-  font-size: 62.5%;
+  font-size: 10px;
   box-sizing: border-box;
 }
 
 body {
+ 
   font-family: 'Poppins', sans-serif;
-  font-weight: 300;
-  color: #444;
-  line-height: 1.9;
+   /* font-weight: 300;  */
+  color: #292929;
+  /* line-height: 1.9; */
   background-color: #f3f3f3;
 }
 
 /* GENERAL ELEMENTS */
-.section {
-  padding: 15rem 3rem;
-  border-top: 1px solid #ddd;
 
-  transition: transform 1s, opacity 1s;
-}
 
 .section--hidden {
   opacity: 0;
