@@ -7,7 +7,7 @@ import { createInertiaApp } from '@inertiajs/vue3';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import { createApp, h } from 'vue';
 import { ZiggyVue } from '../../vendor/tightenco/ziggy';
-import { MotionPlugin } from '@vueuse/motion'
+import VueApexCharts from "vue3-apexcharts";
 import AnimateOnScroll from 'primevue/animateonscroll';
 import Ripple from 'primevue/ripple';
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
@@ -23,7 +23,7 @@ createInertiaApp({
         return createApp({ render: () => h(App, props) })
             .use(plugin)
             .use(ZiggyVue)
-            
+            .use(VueApexCharts)
             .use(PrimeVue, {
                 theme: {
                     preset: Aura,
