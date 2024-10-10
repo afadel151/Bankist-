@@ -12,8 +12,18 @@ export default {
 
     theme: {
         extend: {
+            backgroundImage: {
+                'custom-gradient': 'linear-gradient(to top left, #39b385, #9be15d)',
+              },
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
+            },
+            transform: ['hover', 'focus'], // Optionnel pour ajouter des états
+            scale: {
+                '107-105': 'scale(1.07, 1.05)', // Classe personnalisée pour le scale
+            },
+            skew: {
+                '-15': '-15deg',
             },
         },
     },

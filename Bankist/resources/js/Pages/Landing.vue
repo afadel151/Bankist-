@@ -6,28 +6,28 @@ import TabPanels from 'primevue/tabpanels';
 import TabPanel from 'primevue/tabpanel';
 import Button from 'primevue/button';
 import Carousel from 'primevue/carousel';
-import { ref , onMounted} from 'vue';
+import { ref, onMounted } from 'vue';
 import Typewriter from 'typewriter-effect/dist/core';
-const typewriterRef = ref(null); 
-import OpenAccount from '@/Components/OpenAccount.vue';
+const typewriterRef = ref(null);
+import { Link } from '@inertiajs/vue3';
 onMounted(() => {
-      const typewriter = new Typewriter(typewriterRef.value, {
-        loop: true,       // Repeat the typewriter effect
-        delay: 75,        // Delay between typing each letter
-        deleteSpeed: 50,  // Speed at which characters are deleted
-      });
+  const typewriter = new Typewriter(typewriterRef.value, {
+    loop: true,       // Repeat the typewriter effect
+    delay: 75,        // Delay between typing each letter
+    deleteSpeed: 50,  // Speed at which characters are deleted
+  });
 
-      // Define the typing sequence
-      typewriter
-        .typeString('A simpler banking experience for a simpler life.')
-        .pauseFor(1000) // Pause for 1 second
-        .deleteAll()    // Delete everything typed so far
-        .typeString('Your finances, simplified.')
-        .pauseFor(1500) // Pause for 1.5 seconds
-        .deleteAll()
-        .typeString('Focus on living, we’ll handle the banking')
-        .start(); // Start the typewriter effect
-    });
+  // Define the typing sequence
+  typewriter
+    .typeString('A simpler banking experience for a simpler life.')
+    .pauseFor(1000) // Pause for 1 second
+    .deleteAll()    // Delete everything typed so far
+    .typeString('Your finances, simplified.')
+    .pauseFor(1500) // Pause for 1.5 seconds
+    .deleteAll()
+    .typeString('Focus on living, we’ll handle the banking')
+    .start(); // Start the typewriter effect
+});
 const testimonals = ref(
   [
     {
@@ -35,7 +35,7 @@ const testimonals = ref(
       name: 'John Doe',
       role: 'Customer',
       image: '/imgs/user-1.jpg',
-      testimonal_summary : 'Best financial decision ever!',
+      testimonal_summary: 'Best financial decision ever!',
       text:
         'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vel est vel neque maximus ultricies. Nulla facilisi. Integer ac velit vel nisi ullamcorper lobortis. Donec auctor, mauris vel eleifend viverra, ante velit aliquet ipsum, vel consectetur neque nisi sed neque.',
     },
@@ -43,7 +43,7 @@ const testimonals = ref(
       id: 2,
       name: 'John Doe',
       role: 'Customer',
-      testimonal_summary : 'The best day to join Bankist was one year ago. The second best is today!',
+      testimonal_summary: 'The best day to join Bankist was one year ago. The second best is today!',
       image: '/imgs/user-2.jpg',
       text:
         'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vel est vel neque maximus ultricies. Nulla facilisi. Integer ac velit vel nisi ullamcorper lobortis. Donec auctor, mauris vel eleifend viverra, ante velit aliquet ipsum, vel consectetur neque nisi sed neque.',
@@ -52,7 +52,7 @@ const testimonals = ref(
       id: 3,
       name: 'John Doe',
       role: 'Customer',
-      testimonal_summary : ' The best day to join Bankist was one year ago. The second best is today!',
+      testimonal_summary: ' The best day to join Bankist was one year ago. The second best is today!',
 
       image: '/imgs/user-3.jpg',
       text:
@@ -61,78 +61,89 @@ const testimonals = ref(
 )
 
 const responsiveOptions = ref([
-    {
-        breakpoint: '1400px',
-        numVisible: 2,
-        numScroll: 1
-    },
-    {
-        breakpoint: '1199px',
-        numVisible: 3,
-        numScroll: 1
-    },
-    {
-        breakpoint: '767px',
-        numVisible: 2,
-        numScroll: 1
-    },
-    {
-        breakpoint: '575px',
-        numVisible: 1,
-        numScroll: 1
-    }
+  {
+    breakpoint: '1400px',
+    numVisible: 2,
+    numScroll: 1
+  },
+  {
+    breakpoint: '1199px',
+    numVisible: 3,
+    numScroll: 1
+  },
+  {
+    breakpoint: '767px',
+    numVisible: 2,
+    numScroll: 1
+  },
+  {
+    breakpoint: '575px',
+    numVisible: 1,
+    numScroll: 1
+  }
 ]); 
 </script>
 
-<template >
-<header class="bg-[#f2f2f2] backdrop-opacity-lg font-bold text-xl header">
-    <nav class="nav">
-      <img data-aos="fade-up-right" src="/imgs/logo.png" alt="Bankist logo" class="nav__logo" id="logo" />
-      <ul class="nav__links">
-        <li class="nav__item">
-          <a class="nav__link" href="#section--1">Features</a>
+<template>
+  <header class="backdrop-opacity-lg w-screen h-screen font-bold text-xl">
+    <nav class="flex justify-between items-center px-20 py-5 w-full">
+      <img data-aos="fade-down" src="/imgs/logo.png" alt="Bankist logo" class="w-52" id="logo" />
+      <ul class="flex justify-center items-center space-x-5">
+        <li >
+          <a  href="#section--1">Features</a>
         </li>
-        <li class="nav__item">
-          <a class="nav__link" href="#section--2">Operations</a>
+        <li >
+          <a  href="#section--2">Operations</a>
         </li>
-        <li class="nav__item">
-          <a class="nav__link" href="#section--3">Testimonials</a>
+        <li class="mr-5" >
+          <a  href="#section--3">Testimonials</a>
         </li>
-        <li class="nav__item">
-          <OpenAccount />
+        <!-- login register -->
+        <li class="flex justify-center items-center space-x-2 pl-5" >
+          <Link :href="route('login')">
+            <Button label="Log in" rounded raised  size="large" />
+          </Link>
+          
+          <Link :href="route('register')">
+          <Button label="Register" class="text-xl" rounded raised size="large" />
+          </Link>
         </li>
       </ul>
     </nav>
-    <div class="text-[10px] header__title">
-      <h1 class="text-[50px]">
-        When
-        <span class="highlight">banking</span>
-        meets<br />
-        <span class="highlight">minimalist</span>
-      </h1>
-      <h4 ref="typewriterRef"></h4>
-      <button class="btn--scroll-to btn--text">Learn more 
-        <i class="pi-arrow-down animate-bounce pi" style="font-size: 1.5rem;"></i>
-      </button>
-      <img src="/imgs/hero.png" class="header__img" alt="Minimalist bank items" />
+    <div class="flex justify-between items-center px-64 pb-20 w-screen h-full text-[10px]">
+      <div class="flex flex-col items-start space-y-8 mb-16">
+        <h1 class="text-[70px]">
+          When
+          <span class="after:block relative after:bottom-0 after:left-0 after:-z-[1] after:absolute after:content-[''] after:bg-custom-gradient after:bg-[#5ec576] after:opacity-70 after:-skew-x-15 after:w-[100%] after:h-[100%] after:transform after:scale-110">banking</span>
+          meets<br />
+          <span class="after:block relative after:bottom-0 after:left-0 after:-z-[1] after:absolute after:content-[''] after:bg-custom-gradient after:bg-[#5ec576] after:opacity-70 after:-skew-x-15 after:w-[100%] after:h-[100%] after:transform after:scale-110">minimalist</span>
+        </h1>
+        <p class="text-2xl" ref="typewriterRef"></p>
+        <button class="btn--scroll-to btn--text">Learn more
+          <i class="pi-arrow-down animate-bounce pi" style="font-size: 1.5rem;"></i>
+        </button>
+      </div>
+      <img src="/imgs/hero.png" class="mb-16 w-[550px]" alt="Minimalist bank items" />
     </div>
   </header>
 
   <section class="px-[20rem] py-[10rem] border-t-[#ddd] border-t-[1px] transition-opacity section" id="section--1">
-    <div data-aos="fade-up"  class="section__title">
+    <div data-aos="fade-up" class="section__title">
       <h2 class="section__description">Features</h2>
       <h3 class="section__header">
-        Everything you need in a modern bank and more. 
+        Everything you need in a modern bank and more.
       </h3>
     </div>
-   
-    <div  class="features">
-      <img data-aos="fade-right" data-aos-duration="1500"  src="/imgs/digital.jpg" alt="Computer" class="shadow-xl rounded-2xl" />
-      <div  data-aos="fade-left" data-aos-duration="1500"   class="features__feature">
+
+    <div class="features">
+      <img data-aos="fade-right" data-aos-duration="1500" src="/imgs/digital.jpg" alt="Computer"
+        class="shadow-xl rounded-2xl" />
+      <div data-aos="fade-left" data-aos-duration="1500" class="features__feature">
         <div class="features__icon">
           <i class="pi-desktop pi" style="font-size: 2rem"></i>
         </div>
-        <h5 data-aos="fade-left" data-aos-duration="500" data-aos-delay="200" class="features__header">100% digital bank</h5>
+        <h5 data-aos="fade-left" data-aos-duration="500" data-aos-delay="200" class="features__header">100% digital bank
+        </h5>
         <p data-aos="fade-left" data-aos-duration="500" data-aos-delay="500">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde alias
           sint quos? Accusantium a fugiat porro reiciendis saepe quibusdam
@@ -140,9 +151,9 @@ const responsiveOptions = ref([
         </p>
       </div>
 
-      <div data-aos="fade-left" data-aos-duration="1500"  class="features__feature">
+      <div data-aos="fade-left" data-aos-duration="1500" class="features__feature">
         <div class="features__icon">
-         <i class="pi pi-chart-line" style="font-size: 2rem;"></i>
+          <i class="pi pi-chart-line" style="font-size: 2rem;"></i>
         </div>
         <h5 class="features__header">Watch your money grow</h5>
         <p>
@@ -151,9 +162,11 @@ const responsiveOptions = ref([
           quibusdam!
         </p>
       </div>
-      <img data-aos="fade-right" data-aos-duration="1500" src="/imgs/grow.jpg" alt="Plant" class="shadow-xl rounded-2xl features__img" />
+      <img data-aos="fade-right" data-aos-duration="1500" src="/imgs/grow.jpg" alt="Plant"
+        class="shadow-xl rounded-2xl features__img" />
 
-      <img data-aos="fade-right" data-aos-duration="1500" src="/imgs/card.jpg" alt="Credit card" class="shadow-xl rounded-2xl features__img" />
+      <img data-aos="fade-right" data-aos-duration="1500" src="/imgs/card.jpg" alt="Credit card"
+        class="shadow-xl rounded-2xl features__img" />
       <div data-aos="fade-left" data-aos-duration="1500" class="features__feature">
         <div class="features__icon">
           <i class="pi pi-credit-card" style="font-size: 2rem;"></i>
@@ -168,21 +181,22 @@ const responsiveOptions = ref([
     </div>
   </section>
 
-  <section  class=" py-[10rem] border-t-2 section" id="section--2">
-    <div data-aos="fade-up" data-aos-duration="1500"    class="section__title">
+  <section class="py-[10rem] border-t-2 section" id="section--2">
+    <div data-aos="fade-up" data-aos-duration="1500" class="section__title">
       <h2 class="section__description">Operations</h2>
       <h3 class="section__header">
         Everything as simple as possible, but no simpler.
       </h3>
     </div>
-    <Tabs data-aos="fade-up" data-aos-duration="1500"  class="shadow-lg operations" value="0">
-    <TabList class="rounded-xl text-xl">
-        <Tab class="h-24 font-bold"  value="0"><span class="bg-yellow-300 mr-5 p-2 rounded-full text-slate-900">01</span>Instant Transfers</Tab>
+    <Tabs data-aos="fade-up" data-aos-duration="1500" class="shadow-lg operations" value="0">
+      <TabList class="rounded-xl text-xl">
+        <Tab class="h-24 font-bold" value="0"><span
+            class="bg-yellow-300 mr-5 p-2 rounded-full text-slate-900">01</span>Instant Transfers</Tab>
         <Tab value="1"><span class="bg-[#daf2e0] mr-5 p-2 rounded-full text-black">02</span>Instant Loans</Tab>
         <Tab value="2"><span class="bg-[#ffe3e4] mr-5 p-2 rounded-full text-black">03</span>Instant CLosing</Tab>
-    </TabList>
-    <TabPanels>
-        <TabPanel  value="0">
+      </TabList>
+      <TabPanels>
+        <TabPanel value="0">
           <div class="operations__content--1 operations__content--active operations__content">
             <div class="operations__icon operations__icon--1">
               <i class="pi pi-rotate-180 pi-upload" style="font-size: 2rem;"></i>
@@ -216,55 +230,56 @@ const responsiveOptions = ref([
         </TabPanel>
         <TabPanel value="2">
           <div class="operations__content--3 operations__content--active operations__content">
-        <div class="operations__icon operations__icon--3">
-          <i class="pi pi-user" style="font-size:2rem;"></i>
-        </div>
-        <h5 class="operations__header">
-          No longer need your account? No problem! Close it instantly.
-        </h5>
-        <p>
-          Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
-          officia deserunt mollit anim id est laborum. Ut enim ad minim
-          veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
-          ea commodo consequat.
-        </p>
-      </div>
+            <div class="operations__icon operations__icon--3">
+              <i class="pi pi-user" style="font-size:2rem;"></i>
+            </div>
+            <h5 class="operations__header">
+              No longer need your account? No problem! Close it instantly.
+            </h5>
+            <p>
+              Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
+              officia deserunt mollit anim id est laborum. Ut enim ad minim
+              veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
+              ea commodo consequat.
+            </p>
+          </div>
         </TabPanel>
-    </TabPanels>
-</Tabs>
-    
+      </TabPanels>
+    </Tabs>
+
   </section>
 
-  <section data-aos="fade-up" data-aos-duration="1500"  class=" py-[10rem] border-t-2 section" id="section--3">
+  <section data-aos="fade-up" data-aos-duration="1500" class="py-[10rem] border-t-2 section" id="section--3">
     <div data-aos="fade-up" data-aos-duration="1500" class="section__title section__title--testimonials">
-      <h2   class="section__description">Not sure yet?</h2>
+      <h2 class="section__description">Not sure yet?</h2>
       <h3 class="section__header">
         Millions of Bankists are already making their lifes simpler.
       </h3>
     </div>
     <div class="flex justify-center items-center w-screen">
-      <Carousel data-aos="fade-up" data-aos-duration="2000" :value="testimonals" :numVisible="1" class="w-[50%]" :numScroll="1" :responsiveOptions="responsiveOptions">
-      <template  #item="slotProps">
-        <div class="mx-28 my-16 testimonial">
-        
-          <h5 class="testimonial__header">{{slotProps.data.testimonal_summary}}</h5>
-          <blockquote class="testimonial__text">
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-            Accusantium quas quisquam non? Quas voluptate nulla minima
-            deleniti optio ullam nesciunt, numquam corporis et asperiores
-            laboriosam sunt, praesentium suscipit blanditiis. Necessitatibus
-            id alias reiciendis, perferendis facere pariatur dolore veniam
-            autem esse non voluptatem saepe provident nihil molestiae.
-          </blockquote>
-          <address class="testimonial__author">
-            <img :src="slotProps.data.image"  class="testimonial__photo" />
-            <h6 class="testimonial__name">Aarav Lynn</h6>
-            <p class="testimonial__location">San Francisco, USA</p>
-          </address>
-      
-      </div>
-      </template>
-    </Carousel>
+      <Carousel data-aos="fade-up" data-aos-duration="2000" :value="testimonals" :numVisible="1" class="w-[50%]"
+        :numScroll="1" :responsiveOptions="responsiveOptions">
+        <template #item="slotProps">
+          <div class="mx-28 my-16 testimonial">
+
+            <h5 class="testimonial__header">{{ slotProps.data.testimonal_summary }}</h5>
+            <blockquote class="testimonial__text">
+              Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+              Accusantium quas quisquam non? Quas voluptate nulla minima
+              deleniti optio ullam nesciunt, numquam corporis et asperiores
+              laboriosam sunt, praesentium suscipit blanditiis. Necessitatibus
+              id alias reiciendis, perferendis facere pariatur dolore veniam
+              autem esse non voluptatem saepe provident nihil molestiae.
+            </blockquote>
+            <address class="testimonial__author">
+              <img :src="slotProps.data.image" class="testimonial__photo" />
+              <h6 class="testimonial__name">Aarav Lynn</h6>
+              <p class="testimonial__location">San Francisco, USA</p>
+            </address>
+
+          </div>
+        </template>
+      </Carousel>
     </div>
     <!-- <div class="slider">
       <div class="slide slide--1">
@@ -332,8 +347,8 @@ const responsiveOptions = ref([
     </div> -->
   </section>
 
-  <section data-aos="fade-up" data-aos-duration="1500"  class=" py-[3rem] section section--sign-up">
-    <div data-aos="fade-up" data-aos-duration="3000"  class="section__title">
+  <section data-aos="fade-up" data-aos-duration="1500" class="py-[3rem] section section--sign-up">
+    <div data-aos="fade-up" data-aos-duration="3000" class="section__title">
       <h3 class="section__header">
         The best day to join Bankist was one year ago. The second best is
         today!
@@ -367,7 +382,7 @@ const responsiveOptions = ref([
       </li>
     </ul>
     <img src="/imgs/icon.png" alt="Logo" class="footer__logo" />
-   
+
   </footer>
 
 
@@ -445,14 +460,13 @@ const responsiveOptions = ref([
 }
 
 html {
-  font-size: 10px;
   box-sizing: border-box;
 }
 
 body {
- 
+
   font-family: 'Poppins', sans-serif;
-   /* font-weight: 300;  */
+  /* font-weight: 300;  */
   color: #292929;
   /* line-height: 1.9; */
   background-color: #f3f3f3;
@@ -773,6 +787,7 @@ h4 {
 .operations__content p {
   grid-column: 2;
 }
+
 .operations__icon--1 {
   background-color: var(--color-secondary-opacity);
 }
@@ -1097,10 +1112,11 @@ h4 {
   font-size: 1.5rem;
   font-weight: 400;
 }
+
 .p-tablist-tab-list {
-width: 100%;
-display: flex;
-justify-content: center;
-gap: 40px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 40px;
 }
 </style>
