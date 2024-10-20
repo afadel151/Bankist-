@@ -17,9 +17,12 @@ return new class extends Migration
             $table->string('first_name');
             $table->string('last_name');
             $table->string('position');
+            $table->string('city');
+            $table->string('street');
+            $table->string('phone_number');
             $table->decimal('salary',18,2);
             $table->string('email')->unique();
-            $table->string('password')->default('12345678');
+            $table->string('password');
             $table->timestamps();
         });
     }

@@ -13,9 +13,12 @@ return new class extends Migration
     {
         Schema::create('branches', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('adress');
-            $table->string('phone');
+            $table->string('country');
+            $table->string('state');
+            $table->string('city');
+            $table->string('street');
+            $table->string('phone_number');
+            $table->integer('postal_code');
             $table->timestamps();
         });
     }

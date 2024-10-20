@@ -127,10 +127,10 @@ const responsiveOptions = ref([
     </div>
   </header>
 
-  <section class="px-[20rem] py-[10rem] border-t-[#ddd] border-t-[1px] transition-opacity section" id="section--1">
-    <div data-aos="fade-up" class="section__title">
-      <h2 class="section__description">Features</h2>
-      <h3 class="section__header">
+  <section class="px-[3rem] py-[15rem] border-t-[#ddd] flex justify-center items-center flex-col border-t-[1px] transition-opacity " id="section--1">
+    <div data-aos="fade-up" class="max-w-[80rem]   mt-0 mb-[8rem]">
+      <h2 class="text-[1.8rem] text-bold uppercase text-[#5ec576] mb-[1rem]"> Features</h2>
+      <h3 class="font-bold text-slate-800 text-[3rem] leading-[1.3]">
         Everything you need in a modern bank and more.
       </h3>
     </div>
@@ -181,14 +181,14 @@ const responsiveOptions = ref([
     </div>
   </section>
 
-  <section class="py-[10rem] border-t-2 section" id="section--2">
-    <div data-aos="fade-up" data-aos-duration="1500" class="section__title">
-      <h2 class="section__description">Operations</h2>
-      <h3 class="section__header">
+  <section class="px-[12rem] py-[15rem] border-t-[#ddd] flex justify-center items-center flex-col border-t-[1px] transition-opacity " id="section--2">
+    <div data-aos="fade-up" data-aos-duration="1500" class="max-w-[80rem]   mt-0 mb-[8rem]">
+      <h2 class="text-[1.8rem] text-bold uppercase text-[#5ec576] mb-[1rem]">Operations</h2>
+      <h3 class="font-bold text-slate-800 text-[3rem] leading-[1.3]">
         Everything as simple as possible, but no simpler.
       </h3>
     </div>
-    <Tabs data-aos="fade-up" data-aos-duration="1500" class="shadow-lg operations" value="0">
+    <Tabs data-aos-duration="1500" class="shadow-lg scale-75" value="0">
       <TabList class="rounded-xl text-xl">
         <Tab class="h-24 font-bold" value="0"><span
             class="bg-yellow-300 mr-5 p-2 rounded-full text-slate-900">01</span>Instant Transfers</Tab>
@@ -249,21 +249,21 @@ const responsiveOptions = ref([
 
   </section>
 
-  <section data-aos="fade-up" data-aos-duration="1500" class="py-[10rem] border-t-2 section" id="section--3">
-    <div data-aos="fade-up" data-aos-duration="1500" class="section__title section__title--testimonials">
-      <h2 class="section__description">Not sure yet?</h2>
-      <h3 class="section__header">
+  <section data-aos="fade-up" data-aos-duration="1500" class="px-[12rem] py-[15rem] border-t-[#ddd] flex justify-center items-center flex-col border-t-[1px] transition-opacity" id="section--3">
+    <div data-aos="fade-up" data-aos-duration="1500" class="max-w-[80rem]   mt-0 mb-[8rem] ">
+      <h2 class="text-[1.8rem] text-bold uppercase text-[#5ec576] mb-[1rem]">Not sure yet?</h2>
+      <h3 class="font-bold text-slate-800 text-[3rem] leading-[1.3]">
         Millions of Bankists are already making their lifes simpler.
       </h3>
     </div>
     <div class="flex justify-center items-center w-screen">
-      <Carousel data-aos="fade-up" data-aos-duration="2000" :value="testimonals" :numVisible="1" class="w-[50%]"
+      <Carousel  data-aos-duration="2000" :value="testimonals" :numVisible="1" class="w-[60%] scale-90"
         :numScroll="1" :responsiveOptions="responsiveOptions">
         <template #item="slotProps">
-          <div class="mx-28 my-16 testimonial">
+          <div class="mx-28 scale-75 my-16 ">
 
-            <h5 class="testimonial__header">{{ slotProps.data.testimonal_summary }}</h5>
-            <blockquote class="testimonial__text">
+            <h5 class="text-[2.25rem] font-semibold mb-[1.5rem]">``{{ slotProps.data.testimonal_summary }} ``</h5>
+            <blockquote class="text-[1.7rem] font-medium mb-[3.5rem] text-[#666]">
               Lorem ipsum dolor sit, amet consectetur adipisicing elit.
               Accusantium quas quisquam non? Quas voluptate nulla minima
               deleniti optio ullam nesciunt, numquam corporis et asperiores
@@ -271,85 +271,23 @@ const responsiveOptions = ref([
               id alias reiciendis, perferendis facere pariatur dolore veniam
               autem esse non voluptatem saepe provident nihil molestiae.
             </blockquote>
-            <address class="testimonial__author">
+            <address class="mt-5 grid gap-[2rem]" style="grid-template-columns: 6.5rem 1fr;">
               <img :src="slotProps.data.image" class="testimonial__photo" />
+            
               <h6 class="testimonial__name">Aarav Lynn</h6>
               <p class="testimonial__location">San Francisco, USA</p>
+            
             </address>
 
           </div>
         </template>
       </Carousel>
     </div>
-    <!-- <div class="slider">
-      <div class="slide slide--1">
-        <div class="testimonial">
-          <h5 class="testimonial__header">Best financial decision ever!</h5>
-          <blockquote class="testimonial__text">
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-            Accusantium quas quisquam non? Quas voluptate nulla minima
-            deleniti optio ullam nesciunt, numquam corporis et asperiores
-            laboriosam sunt, praesentium suscipit blanditiis. Necessitatibus
-            id alias reiciendis, perferendis facere pariatur dolore veniam
-            autem esse non voluptatem saepe provident nihil molestiae.
-          </blockquote>
-          <address class="testimonial__author">
-            <img src="img/user-1.jpg" alt="" class="testimonial__photo" />
-            <h6 class="testimonial__name">Aarav Lynn</h6>
-            <p class="testimonial__location">San Francisco, USA</p>
-          </address>
-        </div>
-      </div>
-
-      <div class="slide slide--2">
-        <div class="testimonial">
-          <h5 class="testimonial__header">
-            The last step to becoming a complete minimalist
-          </h5>
-          <blockquote class="testimonial__text">
-            Quisquam itaque deserunt ullam, quia ea repellendus provident,
-            ducimus neque ipsam modi voluptatibus doloremque, corrupti
-            laborum. Incidunt numquam perferendis veritatis neque repellendus.
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Illo
-            deserunt exercitationem deleniti.
-          </blockquote>
-          <address class="testimonial__author">
-            <img src="img/user-2.jpg" alt="" class="testimonial__photo" />
-            <h6 class="testimonial__name">Miyah Miles</h6>
-            <p class="testimonial__location">London, UK</p>
-          </address>
-        </div>
-      </div>
-
-      <div class="slide slide--3">
-        <div class="testimonial">
-          <h5 class="testimonial__header">
-            Finally free from old-school banks
-          </h5>
-          <blockquote class="testimonial__text">
-            Debitis, nihil sit minus suscipit magni aperiam vel tenetur
-            incidunt commodi architecto numquam omnis nulla autem,
-            necessitatibus blanditiis modi similique quidem. Odio aliquam
-            culpa dicta beatae quod maiores ipsa minus consequatur error sunt,
-            deleniti saepe aliquid quos inventore sequi. Necessitatibus id
-            alias reiciendis, perferendis facere.
-          </blockquote>
-          <address class="testimonial__author">
-            <img src="img/user-3.jpg" alt="" class="testimonial__photo" />
-            <h6 class="testimonial__name">Francisco Gomes</h6>
-            <p class="testimonial__location">Lisbon, Portugal</p>
-          </address>
-        </div>
-      </div>
-
-
-
-    </div> -->
   </section>
 
-  <section data-aos="fade-up" data-aos-duration="1500" class="py-[3rem] section section--sign-up">
+  <section data-aos="fade-up" data-aos-duration="1500" class="py-[3rem] section text-center bg-[#37383d]">
     <div data-aos="fade-up" data-aos-duration="3000" class="section__title">
-      <h3 class="section__header">
+      <h3 class="text-5xl text-center mx-auto mt-5 px-20 text-[#fff]">
         The best day to join Bankist was one year ago. The second best is
         today!
       </h3>
@@ -357,8 +295,8 @@ const responsiveOptions = ref([
     <button class="btn--show-modal btn">Open your free account today!</button>
   </section>
 
-  <footer class="footer">
-    <ul class="footer__nav">
+  <footer class="footer ">
+    <ul class="footer__nav scale-75">
       <li class="footer__item">
         <a class="footer__link" href="#">About</a>
       </li>
@@ -422,18 +360,7 @@ const responsiveOptions = ref([
 
 
 
-<!-- <div class="bg-[#f2f2f2] w-screen">
-    <div class="flex justify-between items-center px-20 w-screen h-[100px]">
-        <img src="/imgs/logo.png" alt="" class="h-[45px]">
-        <div class="flex justify-between items-center space-x-10 font-bold text-xl">
-            <Button label="Features" severity="secondary"  />
-            <Button label="Operations" severity="secondary" />
-            <Button label="Testimonals" severity="secondary"  />
-            <Button label="Open account" severity="success" rounded />
-        </div>
 
-    </div>
-</div> -->
 
 
 <style>
@@ -453,11 +380,8 @@ const responsiveOptions = ref([
   --gradient-secondary: linear-gradient(to top left, #ffb003, #ffcb03);
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: inherit;
-}
+
+
 
 html {
   box-sizing: border-box;

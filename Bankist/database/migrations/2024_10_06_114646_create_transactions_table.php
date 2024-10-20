@@ -14,11 +14,9 @@ return new class extends Migration
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
             $table->foreignId('account_id')->constrained('accounts');
-            $table->enum('transaction_type',['deposit','withdrawal','transfer','payment']);
             $table->decimal('amount',18,2);
             $table->string('description');
-            $table->integer('destionation_account_id')->default(null);
-            $table->string('payment_destination')->default(null);
+            $table->foreignId('destionation_account_id')->constrained('accounts');
             $table->timestamps();
         });
     }

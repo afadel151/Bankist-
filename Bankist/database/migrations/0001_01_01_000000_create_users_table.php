@@ -18,7 +18,11 @@ return new class extends Migration
             $table->date('birth_date');
             $table->string('phone_number')->unique();
             $table->string('email')->unique();
-            $table->string('adress');
+            $table->string('country');
+            $table->string('state');
+            $table->string('city');
+            $table->string('street');
+            $table->integer('postal_code');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();

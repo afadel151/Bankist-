@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('card_number',16)->unique();
             $table->enum('card_type',['visa','mastercard','amex']);
             $table->decimal('credit_limit',18,2);
-            $table->decimal('balance',18,2);
+            $table->foreignId('account_id')->constrained('accounts');
             $table->date('expiry_date');
             $table->string('ccv',3);
             $table->timestamps();
