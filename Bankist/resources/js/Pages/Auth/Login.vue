@@ -93,6 +93,7 @@ const submit = () => {
                     label="Log in"
                     :class="{ 'opacity-25': form.processing }"
                     :disabled="form.processing"
+                    @click="submit"
                 />
                    
             </div>

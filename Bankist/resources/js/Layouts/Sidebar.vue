@@ -8,18 +8,20 @@ const op = ref();
 const toggle = (event) => {
   op.value.toggle(event);
 }
+
+const count = ref(0);
 import $ from "jquery";
 import Dropdown from '@/Components/Dropdown.vue';
 import DropdownLink from '@/Components/DropdownLink.vue';
 </script>
-
 <template>
-  <div class="flex flex-col border-x-2">
-
+  <div class="flex flex-col border-x-2 pt-5 h-screen">
+    <div class="w-full flex h-fit justify-center my-5 items-center">
+      <img src="/imgs/logo.png" class="w-56" alt="">
+    </div>
     <div class="overflow-y-auto">
       <ul class="m-0 p-3 list-none">
         <li>
-
           <ul id="favs" class="m-0 p-0 overflow-hidden">
             <li>
               <a v-ripple
@@ -142,6 +144,7 @@ import DropdownLink from '@/Components/DropdownLink.vue';
         </li>
       </ul>
     </div>
+   
     <div class="mt-auto">
       <hr class="mx-3 mb-3 surface-border border-top-1 border-none" />
       <Button type="button" icon="pi pi-arrow-up" severity="secondary" :label="$page.props.auth.user.first_name" @click="toggle"

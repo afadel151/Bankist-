@@ -9,7 +9,7 @@ import Divider from 'primevue/divider';
 <template>
     <div class="p-5 w-full h-full">
         <div class="relative flex flex-col justify-start items-center space-y-4 bg-white py-5 border rounded-3xl w-full h-full">
-            <div class="flex justify-around items-center w-full">
+            <div class="flex justify-between px-14 items-center w-full">
                 <p class="from-bold text-3xl">Accounts</p>
                 <div class="flex items-center gap-2">
                     <Button icon="pi pi-ellipsis-v" severity="secondary" rounded outlined aria-label="Bookmark" />

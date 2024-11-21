@@ -9,7 +9,7 @@ import AllSpending from '@/Components/AllSpending.vue';
 
 <template>
 <MyLayout>
-    <div className="gap-4 grid grid-cols-6 grid-rows-5 auto-cols-auto bg-[#f2f2f27d] w-full" style="height: calc(100vh - 64px);grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr; ">
+    <div className=" grid grid-cols-6 grid-rows-5 auto-cols-auto bg-[#f2f2f27d] w-full" style="height: calc(100vh - 64px);grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr; ">
                 <div  class="col-span-2 row-span-2">
                     <Accounts />   
                 </div>

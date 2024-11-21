@@ -37,7 +37,12 @@ class RegisteredUserController extends Controller
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
             'phone_number'=>'required|numeric',
             'birth_date' => 'required|string',
-            'adress' => 'required|string'
+            // 'country' => 'required|string',
+            // 'state' => 'required|string',
+            // 'city' => 'required|string',
+            // 'street' => 'required|string',
+            'adress' => 'required|string',
+            // 'postal_code' => 'required|integer',
         ]);
 
         $user = User::create([
