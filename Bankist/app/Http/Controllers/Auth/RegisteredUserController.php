@@ -37,12 +37,10 @@ class RegisteredUserController extends Controller
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
             'phone_number'=>'required|numeric',
             'birth_date' => 'required|string',
-            // 'country' => 'required|string',
-            // 'state' => 'required|string',
-            // 'city' => 'required|string',
-            // 'street' => 'required|string',
-            'adress' => 'required|string',
-            // 'postal_code' => 'required|integer',
+            'country' => 'required|string',
+            'state' => 'required|string',
+            'city' => 'required|string',
+            'postal_code' => 'required|string',
         ]);
 
         $user = User::create([
@@ -50,7 +48,11 @@ class RegisteredUserController extends Controller
             'last_name' => $request->last_name,
             'birth_date' => $request->birth_date,
             'email' => $request->email,
-            'adress' => $request->adress,
+            'country' => $request->country,
+            'state' => $request->state,
+            'city' => $request->city,
+            'street' => $request->street,
+            'postal_code' => $request->postal_code,
             'password' => Hash::make($request->password),
             'phone_number' => $request->phone_number
         ]);

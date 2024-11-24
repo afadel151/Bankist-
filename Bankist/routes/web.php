@@ -19,7 +19,7 @@ Route::get('/landing', function () {
 });
 Route::get('/essay', function () {
     return Inertia::render('Essay');
-});
+})->name('essay');
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->name('dashboard');

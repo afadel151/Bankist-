@@ -30,10 +30,10 @@ const form = useForm({
     email: "",
     birth_date: "",
     country: "Algeria",
-    // state: "",
-    // city: "",
-    // street: "",
-    adress : "Algiers",
+    state: '',
+    city: '',
+    street: "",
+    postal_code: '',
     password: "",
     password_confirmation: "",
     phone_number: "",
@@ -77,6 +77,7 @@ const states = ref([
         cities: ["rouiba", "bordj elbahri", "reghaia", "deraria"],
     },
 ]);
+const inputStreet = ref('');
 const SelectedState = ref(0);
 const SelectedCity = ref("");
 const filteredCities = computed(() => {
@@ -87,11 +88,9 @@ const filteredCities = computed(() => {
 
 <template>
     <GuestLayout>
-        {{ SelectedState }}
         <Head title="Register" />
         <form @submit.prevent="submit">
             <p class="text-center text-lg">Create an account</p>
-
             <Stepper value="1">
                 <StepItem value="1">
                     <Step>First & last name</Step>
@@ -152,10 +151,15 @@ const filteredCities = computed(() => {
                                         v-model="form.birth_date"
                                         showIcon
                                         fluid
+                                        required
                                         dateFormat="dd-mm-yy"
                                         class="rounded-xl border-2 mt-1 block"
                                         :showOnFocus="false"
                                         inputId="buttondisplay"
+                                    />
+                                    <InputError
+                                        class="mt-2"
+                                        :message="form.errors.birth_date"
                                     />
                                 </div>
                             </div>
@@ -213,32 +217,57 @@ const filteredCities = computed(() => {
                                         :message="form.errors.phone_number"
                                     />
                                 </div>
-                                <div>
-                                    <InputLabel for="adress" value="Adress" />
-
+                                <div class="mt-4">
+                                    <InputLabel
+                                        for="state"
+                                        value="State"
+                                    />
                                     <Select
-                                        v-model="SelectedState"
+                                        v-model="form.state"
                                         :options="states"
-                                        optionValue="id"
+                                        optionValue="name"
                                         optionLabel="name"
+                                        required
                                         placeholder="Select a State"
                                         class="mt-1 block w-full"
                                     />
+                                    <InputError
+                                        class="mt-2"
+                                        :message="form.errors.state"
+                                    />
+                                </div>
+                                <div class="mt-4">
+                                    <InputLabel
+                                        for="state"
+                                        value="City"
+                                    />
                                     <Select
-                                        v-model="SelectedCity"
+                                        v-model="form.city"
                                         :options="states"
-                                        optionValue="id"
+                                        optionValue="name"
                                         optionLabel="name"
+                                        required
                                         placeholder="Select a City"
                                         class="mt-1 block w-full"
                                     />
                                     <InputError
                                         class="mt-2"
-                                        :message="form.errors.adress"
+                                        :message="form.errors.city"
                                     />
+                                </div>
+                                <div class="mt-4">
+                                    <InputLabel
+                                        for="state"
+                                        value="Street"
+                                    />
+                                    <InputText v-model="form.street"
+                                        placeholder="Street (optional)"
+                                        class="mt-1 block w-full"
+                                    />
+                                    
                                     <InputError
                                         class="mt-2"
-                                        :message="form.errors.adress"
+                                        :message="form.errors.street"
                                     />
                                 </div>
                             </div>
@@ -259,10 +288,25 @@ const filteredCities = computed(() => {
                 <StepItem value="3">
                     <Step>Password</Step>
                     <StepPanel v-slot="{ activateCallback }">
-                        <div class="flex flex-col h-48">
+                        <div class="flex flex-col h-fit">
                             <div
                                 class="px-10 border-surface-200 dark:border-surface-700 rounded bg-surface-50 dark:bg-surface-950 flex-auto flex flex-col justify-center items-stretch font-medium"
                             >
+                            <div class="mt-4">
+                                    <InputLabel
+                                        for="state"
+                                        value="Postal code"
+                                    />
+                                    <InputText v-model="form.postal_code"
+                                        placeholder="Postal code"
+                                        class="mt-1 block w-full"
+                                    />
+                                    
+                                    <InputError
+                                        class="mt-2"
+                                        :message="form.errors.postal_code"
+                                    />
+                                </div>
                                 <div class="mt-4">
                                     <InputLabel
                                         for="password"

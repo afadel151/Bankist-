@@ -10,11 +10,7 @@ use Inertia\Inertia;
 class TransactionController extends Controller
 {
     public function index()
-    {
-
-
-
-        
+    {        
         $accounts = Auth::user()->accounts->pluck('id')->toArray();
         $transactions = Transaction::whereIn('account_id',$accounts)->orWhereIn('destionation_account_id',$accounts)->get()->load(['source','destination']);
         return Inertia::render('Transactions', ['transactions'=>$transactions, 'account'=>$accounts]);
