@@ -4,5 +4,7 @@ import MyLayout from '@/Layouts/MyLayout.vue';
 </script>
 <template>
     <MyLayout>
-        </MyLayout>
+
+
+    </MyLayout>
 </template>

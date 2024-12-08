@@ -10,32 +10,45 @@ import {InputText} from "primevue";
 
 import { ref, onMounted } from "vue";
 import MyLayout from '@/Layouts/MyLayout.vue';
+import AddTrasaction from "@/Components/AddTrasaction.vue";
+
+
+
 const props = defineProps({
     transactions: Array
-})
+});
+
+
+
+
+
 const transactions = ref(props.transactions);
 const selectedTransactions = ref([]);
 const filters = ref({
         global: { value: null, matchMode: FilterMatchMode.CONTAINS },
-        name: {
+        amount: {
             operator: FilterOperator.AND,
             constraints: [
-                { value: null, matchMode: FilterMatchMode.STARTS_WITH },
+                { value: null, matchMode: FilterMatchMode.EQUALS },
             ],
         },
-        platform: {
-            operator: FilterOperator.AND,
-            constraints: [
-                { value: null, matchMode: FilterMatchMode.STARTS_WITH },
-            ], 
-        },
-        type: {
-            operator: FilterOperator.AND,
-            constraints: [{ value: null, matchMode: FilterMatchMode.EQUALS }],
-        },
-        link: {
+        description: {
             operator: FilterOperator.OR,
-            constraints: [{ value: null, matchMode: FilterMatchMode.EQUALS }],
+            constraints: [
+                { value: null, matchMode: FilterMatchMode.CONTAINS },
+            ],
+        },
+        source : {
+            operator: FilterOperator.OR,
+            constraints: [
+                { value: null, matchMode: FilterMatchMode.EQUALS },
+            ],
+        },
+        destination : {
+            operator: FilterOperator.OR,
+            constraints: [
+                { value: null, matchMode: FilterMatchMode.EQUALS },
+            ],
         },
     });
 
@@ -57,21 +70,27 @@ const initFilters = () => {
                 { value: null, matchMode: FilterMatchMode.EQUALS },
             ],
         },
-        source['number'] : {
-            operator: FilterOperator.AND,
+        description: {
+            operator: FilterOperator.OR,
             constraints: [
-                { value: null, matchMode: FilterMatchMode.STARTS_WITH },
+                { value: null, matchMode: FilterMatchMode.CONTAINS },
             ],
         },
-        
-        type: {
-            operator: FilterOperator.AND,
-            constraints: [{ value: null, matchMode: FilterMatchMode.EQUALS }],
-        },
-        link: {
+        source : {
             operator: FilterOperator.OR,
-            constraints: [{ value: null, matchMode: FilterMatchMode.EQUALS }],
+            constraints: [
+                { value: null, matchMode: FilterMatchMode.EQUALS },
+            ],
         },
+        destination : {
+            operator: FilterOperator.OR,
+            constraints: [
+                { value: null, matchMode: FilterMatchMode.EQUALS },
+            ],
+
+        },
+        
+        
     };
 };
 
@@ -79,14 +98,16 @@ const initFilters = () => {
 
 <template>
     <MyLayout>
+        <div class="w-full flex flex-col justify-center space-y-10 items-center mt-20">
+        <AddTrasaction />
 
-
-        {{ props.transactions }} <DataTable
+         <DataTable
                 v-model:filters="filters"
                 v-model:selection="selectedTasks"
                 :value="transactions"
                 paginator
                 :rows="10"
+                class="max-w-[80%]"
                 dataKey="id"
                 filterDisplay="menu"
                 :globalFilterFields="[
@@ -119,13 +140,13 @@ const initFilters = () => {
                     headerStyle="width: 3rem"
                 ></Column>
                 <Column
-                    field="name"
-                    header="Name"
+                    field="source"
+                    header="Source"
                     sortable
                     style="min-width: 14rem"
                 >
                     <template #body="{ data }">
-                        {{ data.name }}
+                        {{ data.source.number }}
                     </template>
                     <template #filter="{ filterModel }">
                         <InputText
@@ -136,13 +157,13 @@ const initFilters = () => {
                     </template>
                 </Column>
                 <Column
-                    field="platform"
-                    header="Platform"
+                    field="destination"
+                    header="Destination"
                     sortable
                     style="min-width: 14rem"
                 >
                     <template #body="{ data }">
-                        {{ data.platform }}
+                        {{ data.destination.number }}
                     </template>
                     <template #filter="{ filterModel }">
                         <InputText
@@ -153,13 +174,13 @@ const initFilters = () => {
                     </template>
                 </Column>
                 <Column
-                    field="type"
-                    header="Type"
+                    field="amount"
+                    header="Amount"
                     sortable
                     style="min-width: 14rem"
                 >
                     <template #body="{ data }">
-                        {{ data.type }}
+                        {{ data.amount }}
                     </template>
                     <template #filter="{ filterModel }">
                         <InputText
@@ -170,13 +191,13 @@ const initFilters = () => {
                     </template>
                 </Column>
                 <Column
-                    field="link"
-                    header="Link"
+                    field="description"
+                    header="description"
                     sortable
                     style="min-width: 14rem"
                 >
                     <template #body="{ data }">
-                        {{ data.link }}
+                        {{ data.description }}
                     </template>
                     <template #filter="{ filterModel }">
                         <InputText
@@ -205,6 +226,7 @@ const initFilters = () => {
                 </Column>
                
             </DataTable>
+        </div>
     </MyLayout>
 
     

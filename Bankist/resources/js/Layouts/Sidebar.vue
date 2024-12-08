@@ -24,82 +24,80 @@ import DropdownLink from '@/Components/DropdownLink.vue';
         <li>
           <ul id="favs" class="m-0 p-0 overflow-hidden">
             <li>
-              <a v-ripple
-                class="flex items-center p-3 border-round text-700 transition-colors transition-duration-300 cursor-pointer hover:surface-100">
-                <i class="mr-2 pi pi-home"></i>
-                <span class="font-medium">Dashboard</span>
-              </a>
+              <Link :href="route('dashboard')"
+                class="flex items-center p-3 border-round text-700 transition-colors transition-duration-300 cursor-pointer hover:surface-100"
+                :class="route().current('dashboard') ? 'text-white bg-gray-600' : ''">
+              <i class="mr-2 pi pi-home"></i>
+              <span class="font-medium">Dashboard</span>
+              </Link>
             </li>
-            <li>
+            <!-- <li>
               <a v-ripple
                 class="flex items-center p-3 p-ripple border-round text-700 transition-colors transition-duration-150 cursor-pointer hover:surface-100">
                 <i class="mr-2 pi pi-bookmark"></i>
-                <span class="font-medium">Bookmarks</span>
+                <span class="font-medium">A</span>
               </a>
-            </li>
+            </li> -->
             <li>
               <a v-ripple @click="$('#reports').slideToggle()"
                 class="flex items-center p-3 border-round text-700 transition-colors transition-duration-150 cursor-pointer hover:surface-100">
-                <i class="mr-2 pi pi-chart-line"></i>
-                <span class="font-medium">Reports</span>
+                <i class="mr-2 pi pi-wallet"></i>
+                <span class="font-medium">Accounts</span>
                 <i class="ml-auto pi pi-chevron-down"></i>
               </a>
               <ul id="reports" class="hidden m-0 py-0 pr-0 pl-3 overflow-y-hidden">
                 <li>
-                  <a @click="$('#revenue').slideToggle()"
-                    class="flex items-center p-3 p-ripple border-round text-700 transition-colors transition-duration-150 cursor-pointer hover:surface-100">
-                    <i class="mr-2 pi pi-chart-line"></i>
-                    <span class="font-medium">Revenue</span>
-                    <i class="ml-auto pi pi-chevron-down"></i>
-                  </a>
-                  <ul id="revenue" class="hidden m-0 py-0 pr-0 pl-3 overflow-y-hidden list-none">
-                    <li>
-                      <a v-ripple
-                        class="flex items-center p-3 p-ripple border-round text-700 transition-colors transition-duration-150 cursor-pointer hover:surface-100">
-                        <i class="mr-2 pi pi-table"></i>
-                        <span class="font-medium">View</span>
-                      </a>
-                    </li>
-                    <li>
-                      <a v-ripple
-                        class="flex items-center p-3 p-ripple border-round text-700 transition-colors transition-duration-150 cursor-pointer hover:surface-100">
-                        <i class="mr-2 pi pi-search"></i>
-                        <span class="font-medium">Search</span>
-                      </a>
-                    </li>
-                  </ul>
+                  <Link :href="route('accounts.checking')"
+                    class="flex items-center p-3 border-round text-700 transition-colors transition-duration-300 cursor-pointer hover:surface-100"
+                    :class="route().current('accounts.checking') ? 'text-white bg-gray-600' : ''"> <i
+                    class="mr-2 pi pi-list-check"></i>
+                  <span class="font-medium">Checking</span>
+                  </Link>
                 </li>
                 <li>
-                  <a v-ripple
-                    class="flex items-center p-3 p-ripple border-round text-700 transition-colors transition-duration-150 cursor-pointer hover:surface-100">
-                    <i class="mr-2 pi pi-chart-line"></i>
-                    <span class="font-medium">Expenses</span>
-                  </a>
+                  <Link :href="route('accounts.saving')"
+                    class="flex items-center p-3 border-round text-700 transition-colors transition-duration-300 cursor-pointer hover:surface-100"
+                    :class="route().current('accounts.saving') ? 'text-white bg-gray-600' : ''"> 
+                      <i class="mr-2 pi pi-save"></i>
+                    <span class="font-medium">Saving</span>
+                </Link>
                 </li>
+                <li>
+                  <Link :href="route('accounts.loan')"
+                    class="flex items-center p-3 border-round text-700 transition-colors transition-duration-300 cursor-pointer hover:surface-100"
+                    :class="route().current('accounts.loan') ? 'text-white bg-gray-600' : ''"> 
+                    <i class="mr-2 pi pi-money-bill"></i>
+                    <span class="font-medium">Loan</span>
+                </Link>
+                </li>
+
               </ul>
             </li>
             <li>
-              <a v-ripple
-                class="flex items-center p-3 p-ripple border-round text-700 transition-colors transition-duration-150 cursor-pointer hover:surface-100">
-                <i class="mr-2 pi pi-users"></i>
-                <span class="font-medium">Team</span>
-              </a>
+              <Link :href="route('payments.index')"
+                    class="flex items-center p-3 border-round text-700 transition-colors transition-duration-300 cursor-pointer hover:surface-100"
+                    :class="route().current('payments.index') ? 'text-white bg-gray-600' : ''"> 
+                    <i class="mr-2 pi pi-credit-card"></i>
+                <span class="font-medium">Payments</span>
+            </Link>
             </li>
             <li>
-              <a v-ripple
-                class="flex items-center p-3 p-ripple border-round text-700 transition-colors transition-duration-150 cursor-pointer hover:surface-100">
-                <i class="mr-2 pi pi-comments"></i>
-                <span class="font-medium">Messages</span>
+              <Link :href="route('loans.index')"
+                    class="flex items-center p-3 border-round text-700 transition-colors transition-duration-300 cursor-pointer hover:surface-100"
+                    :class="route().current('loans.index') ? 'text-white bg-gray-600' : ''">
+                    <i class="mr-2 pi pi-dollar"></i>
+                <span class="font-medium">Loans</span>
                 <span class="inline-flex justify-center items-center border-circle bg-primary ml-auto"
                   style="min-width: 1.5rem; height: 1.5rem">3</span>
-              </a>
+            </Link>
             </li>
             <li>
-              <a v-ripple
-                class="flex items-center p-3 p-ripple border-round text-700 transition-colors transition-duration-150 cursor-pointer hover:surface-100">
-                <i class="mr-2 pi pi-calendar"></i>
-                <span class="font-medium">Calendar</span>
-              </a>
+              <Link :href="route('transactions.index')"
+                    class="flex items-center p-3 border-round text-700 transition-colors transition-duration-300 cursor-pointer hover:surface-100"
+                    :class="route().current('transactions.index') ? 'text-white bg-gray-600' : ''">
+                    <i class="mr-2 pi pi-send"></i>
+                <span class="font-medium">Transactions</span>
+            </Link>
             </li>
             <li>
               <a v-ripple
@@ -144,21 +142,19 @@ import DropdownLink from '@/Components/DropdownLink.vue';
         </li>
       </ul>
     </div>
-   
+
     <div class="mt-auto">
       <hr class="mx-3 mb-3 surface-border border-top-1 border-none" />
-      <Button type="button" icon="pi pi-arrow-up" severity="secondary" :label="$page.props.auth.user.first_name" @click="toggle"
-        class="w-full" />
+      <Button type="button" icon="pi pi-arrow-up" severity="secondary" :label="$page.props.auth.user.first_name"
+        @click="toggle" class="w-full" />
       <Popover ref="op">
         <div class="list-none w-52 flex  flex-col justify-center  items-stretch">
-          <Link  :href="route('profile.edit')"
-            class="   cursor-pointer rounded-border">
-              Profile
+          <Link :href="route('profile.edit')" class="   cursor-pointer rounded-border">
+          Profile
           </Link>
           <hr>
-          <Link :href="route('profile.edit')"
-          class="  cursor-pointer rounded-border">
-            Log out
+          <Link :href="route('logout')" method="post" class="  cursor-pointer rounded-border">
+          Log out
           </Link>
         </div>
       </Popover>

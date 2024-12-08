@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\AccountController;
+use App\Http\Controllers\LoanController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TransactionController;
 use Illuminate\Foundation\Application;
@@ -17,19 +20,35 @@ Route::get('/', function () {
 Route::get('/landing', function () {
     return Inertia::render('Landing');
 });
-Route::get('/essay', function () {
-    return Inertia::render('Essay');
-})->name('essay');
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->name('dashboard');
+
+
 Route::get('/example', function (){
     
 });
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::get('/dashboard', function () {
+        return Inertia::render('Essay');
+    })->name('dashboard');
+    Route::prefix('accounts')->group(function (){
+        Route::get('/', [AccountController::class, 'index'])->name('accounts.index');
+        Route::get('/saving', [AccountController::class, 'saving'])->name('accounts.saving');
+        Route::get('/checking', [AccountController::class, 'checking'])->name('accounts.checking');
+        Route::get('/loan', [AccountController::class, 'loan'])->name('accounts.loan');
+    });
+    Route::prefix('loans')->group(function (){
+        Route::get('/',  [LoanController::class, 'index'])->name('loans.index');
+    });
+    Route::prefix('payments')->group(function (){
+        Route::get('/', [PaymentController::class, 'index'])->name('payments.index');
+    });
+    Route::prefix('transactions')->group(function (){
+        Route::get('/', [TransactionController::class, 'index'])->name('transactions.index');
+        Route::post('/add',[TransactionController::class, 'add'])->name('transactions.add');
+    });
 });
 Route::prefix('transactions')->group(function (){
     Route::get('/', [TransactionController::class, 'index'])->name('transactions.index');
