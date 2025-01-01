@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Account;
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
@@ -28,6 +29,16 @@ class RegisteredUserController extends Controller
      *
      * @throws \Illuminate\Validation\ValidationException
      */
+    public function generateUniqueAccountNumber($existingAccountNumbers = []) {
+        $length = 10; 
+    
+        do {
+            $accountNumber = str_pad(mt_rand(0, pow(10, $length) - 1), $length, '0', STR_PAD_LEFT);
+        } while (in_array($accountNumber, $existingAccountNumbers));
+    
+        return $accountNumber;
+    }
+    
     public function store(Request $request): RedirectResponse
     {
         $request->validate([
@@ -56,7 +67,13 @@ class RegisteredUserController extends Controller
             'password' => Hash::make($request->password),
             'phone_number' => $request->phone_number
         ]);
-
+        Account::create([
+            'user_id' => $user->id,
+            'number' => $this->generateUniqueAccountNumber(Account::pluck('number')->toArray()),
+            'account_type' => 'checking',
+            'balance' => 0.00,
+            'currency' => 'USD',
+        ]);
         event(new Registered($user));
 
         Auth::login($user);

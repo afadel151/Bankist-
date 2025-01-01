@@ -21,7 +21,7 @@ class AccountController extends Controller
     }
     public function loan()
     {
-        return Inertia::render(component: 'Loan');
+        return Inertia::render('Loan');
         
     }
 }

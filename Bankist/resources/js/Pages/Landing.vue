@@ -82,6 +82,25 @@ const responsiveOptions = ref([
     numScroll: 1
   }
 ]); 
+import { Head } from '@inertiajs/vue3';
+
+defineProps({
+    canLogin: {
+        type: Boolean,
+    },
+    canRegister: {
+        type: Boolean,
+    },
+    laravelVersion: {
+        type: String,
+        required: true,
+    },
+    phpVersion: {
+        type: String,
+        required: true,
+    },
+});
+
 </script>
 
 <template>
@@ -99,14 +118,19 @@ const responsiveOptions = ref([
           <a  href="#section--3">Testimonials</a>
         </li>
         <!-- login register -->
-        <li class="flex justify-center items-center space-x-2 pl-5" >
+        <li v-if="canLogin" class="flex justify-center items-center space-x-2 pl-5" >
+          <Link  v-if="$page.props.auth.user" :href="route('dashboard')">
+            <Button label="Dashboard" rounded raised  size="large" />
+          </Link>
+          <template v-else>
           <Link :href="route('login')">
             <Button label="Log in" rounded raised  size="large" />
           </Link>
           
           <Link :href="route('register')">
-          <Button label="Register" class="text-xl" rounded raised size="large" />
+            <Button label="Register" class="text-xl" rounded raised size="large" />
           </Link>
+          </template>
         </li>
       </ul>
     </nav>

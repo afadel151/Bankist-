@@ -15,7 +15,7 @@ import Dropdown from '@/Components/Dropdown.vue';
 import DropdownLink from '@/Components/DropdownLink.vue';
 </script>
 <template>
-  <div class="flex flex-col border-x-2 pt-5 h-screen">
+  <div class="flex flex-col border-r pt-5 h-screen">
     <div class="w-full flex h-fit justify-center my-5 items-center">
       <img src="/imgs/logo.png" class="w-56" alt="">
     </div>

@@ -5,12 +5,13 @@ use App\Http\Controllers\LoanController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\UserController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 Route::get('/', function () {
-    return Inertia::render('Welcome', [
+    return Inertia::render('Landing', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
         'laravelVersion' => Application::VERSION,
@@ -19,11 +20,6 @@ Route::get('/', function () {
 });
 Route::get('/landing', function () {
     return Inertia::render('Landing');
-});
-
-
-Route::get('/example', function (){
-    
 });
 
 Route::middleware('auth')->group(function () {
@@ -47,7 +43,9 @@ Route::middleware('auth')->group(function () {
     });
     Route::prefix('transactions')->group(function (){
         Route::get('/', [TransactionController::class, 'index'])->name('transactions.index');
-        Route::post('/add',[TransactionController::class, 'add'])->name('transactions.add');
+    });
+    Route::prefix('settings')->group(function (){
+        Route::get('/', [UserController::class, 'settings'])->name('users.settings');
     });
 });
 Route::prefix('transactions')->group(function (){

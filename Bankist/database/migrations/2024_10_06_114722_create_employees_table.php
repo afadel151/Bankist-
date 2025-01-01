@@ -13,16 +13,9 @@ return new class extends Migration
     {
         Schema::create('employees', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('admin_id')->constrained('admins');
             $table->foreignId('branch_id')->constrained('branches');
-            $table->string('first_name');
-            $table->string('last_name');
-            $table->string('position');
-            $table->string('city');
-            $table->string('street');
-            $table->string('phone_number');
-            $table->decimal('salary',18,2);
-            $table->string('email')->unique();
-            $table->string('password');
+            $table->foreignId('user_id')->constrained('users');
             $table->timestamps();
         });
     }
