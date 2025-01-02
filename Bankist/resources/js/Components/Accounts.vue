@@ -15,14 +15,13 @@ const formatNumber = (num) => {
 
 <template>
     <div class="p-5 w-full  h-full">
-        <div class="relative px-10 flex flex-col justify-around items-center  bg-white py-5  border rounded-xl w-full h-full">
+        <div class="relative flex flex-col justify-between p-5 items-center  bg-white  border rounded-xl w-full h-full">
             <div class="flex justify-between items-center w-full">
                 <div class="h-fit">
-                    <p class="from-bold text-3xl">Accounts :</p>
-                    <p class="text-lg text-gray-500 font-bold">cheking</p>
+                    <p class="text-2xl text-gray-500 font-thin">cheking</p>
                 </div>
                 <div class="flex items-center gap-2">
-                    <Button icon="pi pi-ellipsis-v" severity="secondary" rounded outlined aria-label="Bookmark" />
+                    <Button icon="pi pi-list" severity="secondary"  outlined aria-label="Bookmark" />
                 </div>
             </div>
             <div

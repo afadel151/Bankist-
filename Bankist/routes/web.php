@@ -48,7 +48,6 @@ Route::middleware('auth')->group(function () {
         Route::get('/', [UserController::class, 'settings'])->name('users.settings');
     });
 });
-Route::prefix('transactions')->group(function (){
-    Route::get('/', [TransactionController::class, 'index'])->name('transactions.index');
-});
+
 require __DIR__.'/auth.php';
+require __DIR__.'/api.php';

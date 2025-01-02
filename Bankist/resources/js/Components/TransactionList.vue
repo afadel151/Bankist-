@@ -1,24 +1,24 @@
 <template>
-    <div class="bg-white rounded-xl shadow-sm p-6">
+    <div class="bg-white border rounded-xl shadow-sm h-full p-4">
       <div class="flex justify-between items-center mb-6">
-        <h3 class="text-lg font-semibold text-gray-800">Recent Transactions</h3>
+        <h3 class="text-xl font-semibold text-gray-800">Recent Transactions</h3>
         <div class="flex space-x-2">
-          <BaseButton variant="secondary" size="sm">
+          <!-- <BaseButton variant="secondary" size="sm">
             <Filter class="w-4 h-4 mr-2" />
             Filter
           </BaseButton>
           <BaseButton variant="secondary" size="sm">
             <Search class="w-4 h-4 mr-2" />
             Search
-          </BaseButton>
+          </BaseButton> -->
         </div>
       </div>
   
-      <div class="space-y-4">
+      <div >
         <div 
           v-for="transaction in transactions" 
           :key="transaction.id"
-          class="flex items-center justify-between p-4 rounded-lg hover:bg-gray-50 transition-colors"
+          class="flex items-center justify-between py-4 rounded-lg hover:bg-gray-50 transition-colors"
         >
           <div class="flex items-center space-x-4">
             <div :class="[
@@ -41,8 +41,8 @@
         </div>
       </div>
   
-      <div class="mt-6 text-center">
-        <BaseButton variant="secondary">View All Transactions</BaseButton>
+      <div class="mt-10 text-center">
+        <BaseButton size="sm" variant="secondary">View All Transactions</BaseButton>
       </div>
     </div>
   </template>
@@ -87,13 +87,6 @@
       description: 'Starbucks Coffee',
       amount: 5.75,
       date: new Date('2024-03-13'),
-      type: 'debit'
-    },
-    {
-      id: 5,
-      description: 'Netflix Subscription',
-      amount: 15.99,
-      date: new Date('2024-03-12'),
       type: 'debit'
     }
   ]

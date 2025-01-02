@@ -17,13 +17,13 @@ use Inertia\Inertia;
 
 Route::prefix('/api')->group(function (){
     Route::prefix('transactions')->group(function(){
-
+        Route::post('add', [TransactionController::class, 'add'])->name('transactions.add');
     });
     Route::prefix('payments')->group(function(){
         Route::post('add',[PaymentController::class, 'add']);
     });
     Route::prefix('loans')->group( function(){
-        Route::post('request',[LoanController::class, 'request']);
+        Route::post('request',[LoanController::class, 'request'])->name('loans.request');
     });
     Route::prefix('cards')->group(function(){
         Route::post('/delete',[CardController::class, 'delete']);
@@ -40,9 +40,6 @@ Route::prefix('/api')->group(function (){
     Route::prefix('machines')->group(function(){
         Route::get('/get_machine', [MachineController::class, 'get']);
     });
-    // Route::prefix('reports')->group(function(){
-    //     Route::post('/add', [])
-    // });
     Route::prefix('refunds')->group(function(){
         Route::post('/add', [RefundController::class, 'add']);
         Route::get('/',[RefundController::class, 'get_refunds']);
@@ -55,4 +52,4 @@ Route::prefix('/api')->group(function (){
         Route::post('add',[WithdrawalController::class, 'add']);
         Route::get('/',[WithdrawalController::class, 'get']);
     });
-});
+})->middleware('auth');

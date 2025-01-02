@@ -64,5 +64,8 @@ class User extends Authenticatable
     public function cards(): HasMany {
         return $this->hasMany(Card::class);
     }
-    
+    public function loans()
+    {
+        return $this->hasMany(Loan::class);
+    }
 }

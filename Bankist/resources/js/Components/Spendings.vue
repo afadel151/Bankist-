@@ -74,7 +74,7 @@ const setChartOptions = () => {
 <template>
     <div class="flex flex-col justify-center items-center bg-white p-5 border rounded-xl w-full h-full">
         <div class="w-full">
-            <h1 class="font-bold text-3xl text-start">Spendings</h1>
+            <h1 class="text-xl font-semibold text-gray-800">Spendings</h1>
             <h1 class="font-bold text-gray-600 text-start">Last 6 months</h1>
         </div>
         <Chart type="line" :data="chartData" :options="chartOptions" class="w-full h-full"  />

@@ -5,6 +5,8 @@ import Accounts from '@/Components/Accounts.vue';
 import Incomes from '@/Components/Incomes.vue';
 import SpendIncomChart from '@/Components/SpendIncomChart.vue';
 import AllSpending from '@/Components/AllSpending.vue';
+import TransactionList from '@/Components/TransactionList.vue';
+
 </script>
 
 <template>
@@ -30,7 +32,7 @@ import AllSpending from '@/Components/AllSpending.vue';
                 <SpendIncomChart />
             </div>
             <div class="col-span-2 col-start-5 row-span-3 row-start-3 p-5">
-                <AllSpending />
+                <TransactionList />
             </div>
         </div>
     </MyLayout>
