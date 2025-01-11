@@ -19,14 +19,14 @@ class LoanController extends Controller
     }
     public function request(Request $request)
     {
-        $loan = Loan::create([
-            'loan_type' => $request->type,
+        Loan::create([
             'amount' => $request->amount,
             'user_id' => Auth::user()->id,
             'nb_months' => $request->nb_months,
             'start_date' => Carbon::today(),
-            'status' => 'waiting'
+            'status' => 'waiting',
+            'loan_type' => $request->type,
         ]);
-        return response()->json($loan);
+        return redirect()->route('loans.index');
     }
 }

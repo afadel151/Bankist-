@@ -34,6 +34,7 @@ class HandleInertiaRequests extends Middleware
             'auth' => [
                 'user' => $request->user(),
                 'csrf' => $request->session()->token(),
+                'accounts' => $request->user()->accounts
             ],
             
         ];

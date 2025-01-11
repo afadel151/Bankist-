@@ -87,7 +87,20 @@ const initFilters = () => {
         
     };
 };
+function formatTimestamp(timestamp) {
+    const date = new Date(timestamp);
 
+    // Extract components
+    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are 0-based
+    const year = date.getFullYear();
+
+    const hours = String(date.getHours()).padStart(2, '0');
+    const minutes = String(date.getMinutes()).padStart(2, '0');
+
+    // Return the formatted string
+    return `${day}-${month}-${year} ${hours}:${minutes}`;
+}
 </script>
 <template>
     <MyLayout>
@@ -136,7 +149,7 @@ const initFilters = () => {
                     style="min-width: 14rem"
                 >
                     <template #body="{ data }">
-                        {{ data.created_at }}
+                        {{ formatTimestamp(data.created_at) }}
                     </template>
                     
                 </Column>

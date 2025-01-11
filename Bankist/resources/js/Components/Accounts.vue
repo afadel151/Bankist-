@@ -2,12 +2,15 @@
 import Button from 'primevue/button';
 import $ from 'jquery';
 import Divider from 'primevue/divider';
+import { usePage } from '@inertiajs/vue3';
 const formatNumber = (num) => {
     return new Intl.NumberFormat('en-US', {
         minimumFractionDigits: 2,
         maximumFractionDigits: 2
     }).format(num)
 }
+
+const user = usePage().props.auth.user
 
 </script>
 
@@ -25,7 +28,7 @@ const formatNumber = (num) => {
                 </div>
             </div>
             <div
-                class="w-full inset-0 bg-gradient-to-br from-[10%] from-green-600 to-yellow-500 rounded-xl p-6 text-white shadow-lg">
+                class="w-full inset-0 bg-gradient-to-br from-[20%] from-green-600 to-yellow-500 rounded-xl p-6 text-white shadow-lg">
                 <div class="flex justify-between items-start">
                     <div>
                         <p class="text-sm opacity-80">Current Balance</p>
@@ -40,7 +43,7 @@ const formatNumber = (num) => {
 
                 <div class="mt-6 flex justify-between items-center">
                     <div>
-                        <p class="text-xs opacity-80">Card Holder</p>
+                        <p class="text-xs opacity-80">{{ user.first_name }} {{ user.last_name }}</p>
                         <p class="font-medium">{{ cardHolder }}</p>
                     </div>
                     <div>

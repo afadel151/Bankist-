@@ -99,6 +99,7 @@ import DropdownLink from '@/Components/DropdownLink.vue';
                 <span class="font-medium">Transactions</span>
             </Link>
             </li>
+            
             <li>
               <a v-ripple
                 class="flex items-center p-3 p-ripple border-round text-700 transition-colors transition-duration-150 cursor-pointer hover:surface-100">
@@ -106,6 +107,7 @@ import DropdownLink from '@/Components/DropdownLink.vue';
                 <span class="font-medium">Settings</span>
               </a>
             </li>
+            
           </ul>
         </li>
       </ul>

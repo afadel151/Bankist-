@@ -37,6 +37,7 @@ Route::middleware('auth')->group(function () {
     });
     Route::prefix('loans')->group(function (){
         Route::get('/',  [LoanController::class, 'index'])->name('loans.index');
+        Route::post('/',  [LoanController::class, 'request'])->name('loans.request');
     });
     Route::prefix('payments')->group(function (){
         Route::get('/', [PaymentController::class, 'index'])->name('payments.index');

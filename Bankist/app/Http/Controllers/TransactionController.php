@@ -13,9 +13,12 @@ class TransactionController extends Controller
 {
     public function index()
     {        
-        $accounts = Auth::user()->accounts->pluck('id')->toArray();
+        $user_accounts = Auth::user()->accounts;
+        $accounts = $user_accounts->pluck('id')->toArray();
         $transactions = Transaction::whereIn('account_id',$accounts)->orWhereIn('destionation_account_id',$accounts)->get()->load(['source','destination']);
-        return Inertia::render('Transactions', ['transactions'=>$transactions]);
+        return Inertia::render('Transactions',['transactions'=>$transactions,
+                                                                    'accounts' => $user_accounts
+                                                                ]);
     }
     public function add(Request $request)
     {

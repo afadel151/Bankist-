@@ -11,11 +11,13 @@ import {InputText} from "primevue";
 import { ref, onMounted } from "vue";
 import MyLayout from '@/Layouts/MyLayout.vue';
 import AddTrasaction from "@/Components/AddTrasaction.vue";
+import { usePage } from "@inertiajs/vue3";
 
 
 
 const props = defineProps({
-    transactions: Array
+    transactions: Array,
+    accounts:Array
 });
 
 
@@ -98,16 +100,18 @@ const initFilters = () => {
 
 <template>
     <MyLayout>
-        <div class="w-full flex flex-col justify-center space-y-10 items-center mt-20">
-        <AddTrasaction />
-
+        <div class="w-full h-[150px] pt-10 px-[6rem]">
+            <p class="text-6xl font-bold text-gray-600">Transactions history</p>
+        </div>
+        <div class="w-full flex flex-col justify-center space-y-10 items-center ">
+        <AddTrasaction :accounts="props.accounts" />
          <DataTable
                 v-model:filters="filters"
                 v-model:selection="selectedTasks"
                 :value="transactions"
                 paginator
                 :rows="10"
-                class="max-w-[80%]"
+                class="min-w-[90%] shadow-xl "
                 dataKey="id"
                 filterDisplay="menu"
                 :globalFilterFields="[
@@ -116,13 +120,7 @@ const initFilters = () => {
             >
                 <template #header>
                     <div class="flex justify-between">
-                        <Button
-                            type="button"
-                            icon="pi pi-filter-slash"
-                            label="Clear"
-                            outlined
-                            @click="clearFilter()"
-                        />
+                       
                         <IconField>
                             <InputIcon>
                                 <i class="pi pi-search" />
@@ -134,11 +132,7 @@ const initFilters = () => {
                         </IconField>
                     </div>
                 </template>
-                <template #empty> No customers found. </template>
-                <Column
-                    selectionMode="multiple"
-                    headerStyle="width: 3rem"
-                ></Column>
+                <template #empty> No Transaction found. </template>
                 <Column
                     field="source"
                     header="Source"

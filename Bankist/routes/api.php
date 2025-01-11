@@ -22,9 +22,7 @@ Route::prefix('/api')->group(function (){
     Route::prefix('payments')->group(function(){
         Route::post('add',[PaymentController::class, 'add']);
     });
-    Route::prefix('loans')->group( function(){
-        Route::post('request',[LoanController::class, 'request'])->name('loans.request');
-    });
+  
     Route::prefix('cards')->group(function(){
         Route::post('/delete',[CardController::class, 'delete']);
         Route::post('/request',[CardController::class, 'request']);

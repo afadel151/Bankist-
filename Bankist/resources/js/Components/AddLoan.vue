@@ -9,7 +9,7 @@ const visible = ref(false);
 const emit = defineEmits(['add_loan']);
 const selectedType = ref('');
 const form = useForm({
-    type: selectedType.value,
+    type: '',
     amount: "",
     nb_months: '',
 });
@@ -21,17 +21,9 @@ const types = ref([
     'business'
 ]);
 const submit = async () => {
-    try {
-        const response = await axios.post('/api/loans/request', form);
-        console.log(response.data);
-        visible.value = false;
-    } catch (error) {
-        if (error.response && error.response.status === 422) {
-                form.setError(error.response.data.errors || {});
-        } else {
-            console.error("An unexpected error occurred:", error);
-        }
-    }
+    form.post(route('loans.request'), {
+        onFinish: () => form.reset('password'),
+    });
 };
 
 </script>
@@ -40,10 +32,9 @@ const submit = async () => {
 
     <Dialog v-model:visible="visible" modal header="Transaction" :style="{ width: '45rem' }">
         <span class="text-surface-500 dark:text-surface-400 block mb-8">Make a transaction to another account.</span>
-       
         <div class="flex items-center gap-4 mb-8">
             <label  class="font-semibold w-32">Type</label>
-            <Select v-model="selectedType" :options="types"  placeholder="Select a Type" class="flex-auto" />
+            <Select v-model="form.type" :options="types" placeholder="Select a Type" class="flex-auto" />
             <InputError class="mt-2" :message="form.errors.type" />
         </div>
         <div class="flex items-center gap-4 mb-8">
