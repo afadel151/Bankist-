@@ -30,6 +30,7 @@ import Select from "primevue/select";
 
 
 import { Head, Link, useForm } from "@inertiajs/vue3";
+import { InputNumber } from "primevue";
 const form = useForm({
     first_name: "",
     last_name: "",
@@ -43,6 +44,7 @@ const form = useForm({
     password: "",
     password_confirmation: "",
     phone_number: "",
+    salary:0.00
 });
 const submit = () => {
     form.birth_date = formatDateToDDMMYY(form.birth_date);
@@ -89,6 +91,7 @@ const filteredCities = computed(() => {
     const state = states.value.find((s) => s.id === SelectedState.value);
     return state ? state.cities : [];
 });
+
 </script>
 
 <template>
@@ -196,6 +199,13 @@ const filteredCities = computed(() => {
                                         class="mt-1 block w-full" />
 
                                     <InputError class="mt-2" :message="form.errors.postal_code" />
+                                </div>
+                                <div class="mt-4">
+                                    <InputLabel value="Monthly Salary" />
+                                    <InputNumber mode="currency" currency="USD" v-model="form.salary" placeholder="0.00"
+                                        class="mt-1 block w-full" />
+
+                                    <InputError class="mt-2" :message="form.errors.salary" />
                                 </div>
                                 <div class="mt-4">
                                     <InputLabel for="password" value="Password" />

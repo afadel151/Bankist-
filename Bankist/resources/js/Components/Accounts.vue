@@ -24,35 +24,66 @@ const user = usePage().props.auth.user
                     <p class="text-2xl text-gray-500 font-thin">cheking</p>
                 </div>
                 <div class="flex items-center gap-2">
-                    <Button icon="pi pi-list" severity="secondary"  outlined aria-label="Bookmark" />
+                    <Button icon="pi pi-list" severity="secondary" outlined aria-label="Bookmark" />
                 </div>
             </div>
             <div
-                class="w-full inset-0 bg-gradient-to-br from-[20%] from-green-600 to-yellow-500 rounded-xl p-6 text-white shadow-lg">
-                <div class="flex justify-between items-start">
-                    <div>
-                        <p class="text-sm opacity-80">Current Balance</p>
-                        <p class="text-2xl font-semibold mt-1">$20</p>
-                    </div>
-                    <CreditCard class="w-8 h-8" />
+                class="w-96 h-52 m-auto  bg-green-500 rounded-xl relative text-white shadow-2xl  transition-transform transform hover:scale-[101%]">
+                <div class="absolute h-40 w-40 -right-10 rounded-full bg-slate-200  opacity-20">
                 </div>
-
-                <div class="mt-8">
-                    <p class="font-medium tracking-widest">**** **** **** 4589</p>
+                <div class="absolute h-20 w-20 bottom-0 -right-10 rounded-full bg-slate-200  opacity-20">
                 </div>
+                <div class="w-full h-full px-8 flex flex-col justify-center  top-2">
+                    <div class="flex justify-between">
+                        <div class="">
+                            <p class="font-light">
+                                Name
+                            </p>
+                            <p class="font-medium tracking-widest">
+                                Karthik P
+                            </p>
+                        </div>
+                    </div>
+                    <div class="pt-1">
+                        <p class="font-light">
+                            Card Number
+                        </p>
+                        <p class="font-medium tracking-more-wider">
+                            4642 3489 9867 7632
+                        </p>
+                    </div>
+                    <div class="pt-6 pr-6">
+                        <div class="flex justify-between">
+                            <div class="">
+                                <p class="font-light text-xs">
+                                    Valid
+                                </p>
+                                <p class="font-medium tracking-wider text-sm">
+                                    11/15
+                                </p>
+                            </div>
+                            <div class="">
+                                <p class="font-light text-xs ">
+                                    Expiry
+                                </p>
+                                <p class="font-medium tracking-wider text-sm">
+                                    03/25
+                                </p>
+                            </div>
 
-                <div class="mt-6 flex justify-between items-center">
-                    <div>
-                        <p class="text-xs opacity-80">{{ user.first_name }} {{ user.last_name }}</p>
-                        <p class="font-medium">{{ cardHolder }}</p>
+                            <div class="">
+                                <p class="font-light text-xs">
+                                    CVV
+                                </p>
+                                <p class="font-bold tracking-more-wider text-sm">
+                                    ···
+                                </p>
+                            </div>
+                        </div>
                     </div>
-                    <div>
-                        <p class="text-xs opacity-80">Expires</p>
-                        <p class="font-medium">{{ expiry }}</p>
-                    </div>
+
                 </div>
             </div>
-
         </div>
     </div>
 </template>

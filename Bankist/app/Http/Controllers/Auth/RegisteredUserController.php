@@ -52,6 +52,7 @@ class RegisteredUserController extends Controller
             'state' => 'required|string',
             'city' => 'required|string',
             'postal_code' => 'required|string',
+            'salary' => 'required'
         ]);
 
         $user = User::create([
@@ -65,7 +66,8 @@ class RegisteredUserController extends Controller
             'street' => $request->street,
             'postal_code' => $request->postal_code,
             'password' => Hash::make($request->password),
-            'phone_number' => $request->phone_number
+            'phone_number' => $request->phone_number,
+            'salary' => $request->salary
         ]);
         Account::create([
             'user_id' => $user->id,
