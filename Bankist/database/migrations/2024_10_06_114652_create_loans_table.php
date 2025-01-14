@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('loans', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained('users');
+            $table->foreignId('user_id')->constrained('u_users');
             $table->enum('loan_type',['home','car','personal','business']);
             $table->decimal('amount',18,2);
             $table->date('start_date');

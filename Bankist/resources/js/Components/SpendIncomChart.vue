@@ -1,6 +1,6 @@
 
 <template>
-    <div class="flex flex-col bg-white p-5 border rounded-xl h-full card">
+    <div class="flex flex-col bg-white p-5 border-2 border-gray-100 shadow-md rounded-xl h-full card">
         <p class="text-xl font-semibold text-gray-800">Balance overview</p>
         <Chart type="line" :data="chartData" :options="chartOptions" class="w-full h-full" />
     </div>

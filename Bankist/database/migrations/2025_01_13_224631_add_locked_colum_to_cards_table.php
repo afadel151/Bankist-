@@ -11,8 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('u_users', function (Blueprint $table) {
-            $table->decimal('salary')->default(0.00);
+        Schema::table('cards', function (Blueprint $table) {
+            $table->boolean('locked')->default(false);
         });
     }
 
@@ -21,7 +21,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('users', function (Blueprint $table) {
+        Schema::table('cards', function (Blueprint $table) {
             //
         });
     }

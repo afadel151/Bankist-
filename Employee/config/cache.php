@@ -41,9 +41,9 @@ return [
         'database' => [
             'driver' => 'database',
             'connection' => env('DB_CACHE_CONNECTION'),
-            'table' => env('DB_CACHE_TABLE', 'employee_cache'),
+            'table' => env('DB_CACHE_TABLE', 'e_cache'),
             'lock_connection' => env('DB_CACHE_LOCK_CONNECTION'),
-            'lock_table' => env('DB_CACHE_LOCK_TABLE','employee_cache_locks'),
+            'lock_table' => env('DB_CACHE_LOCK_TABLE','e_cache_locks'),
         ],
 
         'file' => [

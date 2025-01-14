@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
 class AccountController extends Controller
@@ -13,11 +14,25 @@ class AccountController extends Controller
     }   
     public function saving()
     {
-        return Inertia::render('Saving');
+        $account = Auth::user()->accounts->where('account_type','savings')->first();
+        $account->load('card');
+        $account->card->load(['account','user']);
+        return Inertia::render('Saving',[
+            'account' => $account
+        ]);
+    }
+    public function create_account(Request $request)
+    {
+
     }
     public function checking()
     {
-        return Inertia::render('Checking');
+        $account = Auth::user()->accounts->where('account_type','checking')->first();
+        $account->load('card');
+        $account->card->load(['account','user']);
+        return Inertia::render('Checking',[
+            'account' => $account
+        ]);
     }
     public function loan()
     {

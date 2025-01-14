@@ -53,7 +53,7 @@ return [
             'unix_socket' => env('DB_SOCKET', ''),
             'charset' => env('DB_CHARSET', 'utf8mb4'),
             'collation' => env('DB_COLLATION', 'utf8mb4_unicode_ci'),
-            'prefix' => 'employee_',
+            'prefix' => '',
             'prefix_indexes' => true,
             'strict' => true,
             'engine' => null,
@@ -126,7 +126,7 @@ return [
     */
 
     'migrations' => [
-        'table' => 'employee_migrations',
+        'table' => 'e_migrations',
         'update_date_on_publish' => true,
     ],
 

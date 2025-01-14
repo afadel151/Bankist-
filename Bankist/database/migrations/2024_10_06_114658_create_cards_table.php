@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('cards', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained('users');
+            $table->foreignId('user_id')->constrained('u_users');
             $table->string('card_number',16)->unique();
             $table->enum('card_type',['visa','mastercard','amex']);
             $table->decimal('credit_limit',18,2);

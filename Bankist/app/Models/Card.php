@@ -18,7 +18,9 @@ class Card extends Model
         'credit_limit',
         'balance',
         'expiry_date',
-        'ccv'
+        'ccv',
+        'account_id',
+        'locked'
     ];
 
     public function user() : BelongsTo{
@@ -26,5 +28,8 @@ class Card extends Model
     }
     public function payments(): HasMany {
         return $this->hasMany(Payment::class);
+    }
+    public function account():BelongsTo{
+        return $this->belongsTo(Account::class);
     }
 }

@@ -4,12 +4,15 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\Account;
+use App\Models\Card;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 use Illuminate\Validation\Rules;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -38,7 +41,15 @@ class RegisteredUserController extends Controller
     
         return $accountNumber;
     }
-    
+    public function  generateUniqueVisaCardNumber()
+    {
+        do {
+            $cardNumber = '4' . Str::random(15);
+            $cardNumber = preg_replace('/[^0-9]/', '0', $cardNumber);
+            $exists = Card::where('card_number', $cardNumber)->exists();
+        } while ($exists);
+        return $cardNumber;
+    }
     public function store(Request $request): RedirectResponse
     {
         $request->validate([
@@ -69,17 +80,34 @@ class RegisteredUserController extends Controller
             'phone_number' => $request->phone_number,
             'salary' => $request->salary
         ]);
-        Account::create([
+        $account = Account::create([
             'user_id' => $user->id,
             'number' => $this->generateUniqueAccountNumber(Account::pluck('number')->toArray()),
             'account_type' => 'checking',
             'balance' => 0.00,
             'currency' => 'USD',
         ]);
+        Card::create([
+            'user_id' => $user->id,
+            'card_number' => $this->generateUniqueVisaCardNumber(),
+            'card_type' => 'visa',
+            'credit_limit' => 100000,
+            'account_id' => $account->id,
+            'expiry_date' => $this->getSameDayNextYear(),
+            'ccv' => $this->generateCcv(),
+        ]);
         event(new Registered($user));
 
         Auth::login($user);
 
         return redirect(route('dashboard', absolute: false));
+    }
+    private function getSameDayNextYear()
+    {
+        return Carbon::now()->addYear()->toDateString();
+    }
+    private function generateCcv()
+    {
+        return str_pad(mt_rand(0, 999), 3, '0', STR_PAD_LEFT);
     }
 }

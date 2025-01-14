@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('refunds', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained('users');
+            $table->foreignId('user_id')->constrained('u_users');
             $table->foreignId('loan_id')->constrained('loans');
             $table->date('date');
             $table->decimal('amount',18,2);

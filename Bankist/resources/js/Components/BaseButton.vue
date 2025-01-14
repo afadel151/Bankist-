@@ -25,7 +25,7 @@
   })
   
   const variants = {
-    primary: 'bg-purple-600 hover:bg-purple-700 text-white',
+    primary: 'bg-green-600 hover:bg-green-700 text-white',
     secondary: 'bg-gray-800 hover:bg-gray-700 text-white border border-gray-700'
   }
   

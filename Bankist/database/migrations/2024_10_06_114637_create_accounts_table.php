@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('accounts', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('number')->unique();
-            $table->foreignId('user_id')->constrained('users');
+            $table->foreignId('user_id')->constrained('u_users');
             $table->enum('account_type',['checking','savings','loan']);
             $table->decimal('balance')->default(0);
             $table->string('currency',3)->default('USD');

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AccountController;
+use App\Http\Controllers\CardController;
 use App\Http\Controllers\LoanController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProfileController;
@@ -41,6 +42,9 @@ Route::middleware('auth')->group(function () {
     });
     Route::prefix('payments')->group(function (){
         Route::get('/', [PaymentController::class, 'index'])->name('payments.index');
+    });
+    Route::prefix('cards')->group(function (){
+        Route::get('/{id}/settings', [CardController::class, 'settings'])->name('cards.settings');
     });
     Route::prefix('transactions')->group(function (){
         Route::get('/', [TransactionController::class, 'index'])->name('transactions.index');

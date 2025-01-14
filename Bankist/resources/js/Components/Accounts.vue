@@ -18,8 +18,8 @@ const user = usePage().props.auth.user
 
 <template>
     <div class="p-5 w-full  h-full">
-        <div class="relative flex flex-col justify-between p-5 items-center  bg-white  border rounded-xl w-full h-full">
-            <div class="flex justify-between items-center w-full">
+        <div class="relative flex flex-col justify-between p-5 items-center  bg-white  border-2 border-gray-100 shadow-md rounded-xl w-full h-full">
+            <div class="flex justify-between mb-4 items-center w-full">
                 <div class="h-fit">
                     <p class="text-2xl text-gray-500 font-thin">cheking</p>
                 </div>
@@ -28,7 +28,7 @@ const user = usePage().props.auth.user
                 </div>
             </div>
             <div
-                class="w-96 h-52 m-auto  bg-green-500 rounded-xl relative text-white shadow-2xl  transition-transform transform hover:scale-[101%]">
+                class="w-96 h-52 m-auto  bg-green-500 rounded-xl relative text-white shadow-sm  transition-transform transform hover:scale-[101%]">
                 <div class="absolute h-40 w-40 -right-10 rounded-full bg-slate-200  opacity-20">
                 </div>
                 <div class="absolute h-20 w-20 bottom-0 -right-10 rounded-full bg-slate-200  opacity-20">

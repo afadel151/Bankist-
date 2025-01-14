@@ -11,7 +11,7 @@ import InputText from "primevue/inputtext";
       <div class="w-80 h-screen sticky top-0">
         <Sidebar class="w-[300px]"  />
       </div>
-      <div class="w-full bg-[radial-gradient(circle,rgba(0,0,0,0.075)_1.5px,transparent_1px)] bg-[length:10px_10px] ">
+      <div class="w-full bg-gray-100 ">
         <slot />
       </div>
     </div>

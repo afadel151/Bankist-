@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Account extends Model
 {
@@ -34,5 +35,8 @@ class Account extends Model
     public function received_transactions(): HasMany 
     {
         return $this->hasMany(Transaction::class, 'destionation_account_id');
+    }
+    public function card() : HasOne {
+        return $this->hasOne(Card::class);
     }
 }

@@ -26,7 +26,7 @@ Route::prefix('/api')->group(function (){
     Route::prefix('cards')->group(function(){
         Route::post('/delete',[CardController::class, 'delete']);
         Route::post('/request',[CardController::class, 'request']);
-        Route::post('freeze',[CardController::class, 'freeze']);
+        Route::post('lock',[CardController::class, 'lock']);
         Route::post('unfreeze',[CardController::class, 'unfreeze']);
         Route::post('edit',[CardController::class, 'edit']);
     });
