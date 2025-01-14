@@ -32,9 +32,10 @@ Route::middleware('auth')->group(function () {
     })->name('dashboard');
     Route::prefix('accounts')->group(function (){
         Route::get('/', [AccountController::class, 'index'])->name('accounts.index');
-        Route::get('/saving', [AccountController::class, 'saving'])->name('accounts.saving');
+        Route::get('/saving', [AccountController::class, 'saving'])->name('accounts.savings');
         Route::get('/checking', [AccountController::class, 'checking'])->name('accounts.checking');
         Route::get('/loan', [AccountController::class, 'loan'])->name('accounts.loan');
+        Route::post('/create',[AccountController::class, 'create_account'])->name('accounts.create');
     });
     Route::prefix('loans')->group(function (){
         Route::get('/',  [LoanController::class, 'index'])->name('loans.index');

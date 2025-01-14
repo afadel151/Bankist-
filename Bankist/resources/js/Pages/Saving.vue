@@ -7,8 +7,17 @@ import AccountHeader from '@/Components/AccountHeader.vue';
 import SpendingChart from '@/Components/SpendingChart.vue';
 import TransactionList from '@/Components/TransactionList.vue';
 import CardDetails from '@/Components/CardDetails.vue';
+import { Button } from 'primevue';
+import { useForm } from '@inertiajs/vue3';
 
+const form = useForm({
+    type: 'savings'
+});
 
+function create()
+{
+    form.post(route('accounts.create'))
+}
 const accountData = {
     balance: 12458.96,
     cardHolder: 'JOHN DOE',
@@ -39,8 +48,8 @@ const props = defineProps({
                     </div>
                 </div>
             </div>
-            <div v-else class="">
-
+            <div v-else class=" h-full w-full flex justify-center items-center">
+                <Button label="Open Savings Account" @click="create" />
             </div>
         </div>
 

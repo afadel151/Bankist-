@@ -15,10 +15,41 @@ class TransactionController extends Controller
     {        
         $user_accounts = Auth::user()->accounts;
         $accounts = $user_accounts->pluck('id')->toArray();
-        $transactions = Transaction::whereIn('account_id',$accounts)->orWhereIn('destionation_account_id',$accounts)->get()->load(['source','destination']);
+        $transactions = Transaction::whereIn('account_id',$accounts)->orWhereIn('destionation_account_id',$accounts)->get()->load(['senderAccount','receiverAccount']);
         return Inertia::render('Transactions',['transactions'=>$transactions,
                                                                     'accounts' => $user_accounts
                                                                 ]);
+    }
+    public function getRecentTransactions()
+    {
+        // Get the authenticated user's accounts
+        $userAccounts = auth()->user()->accounts()->pluck('id');
+
+        // Fetch the last 4 transactions (both sent and received)
+        $transactions = Transaction::with(['senderAccount.user', 'receiverAccount.user'])
+            ->where(function ($query) use ($userAccounts) {
+                $query->whereIn('account_id', $userAccounts) // Transactions sent by the user
+                    ->orWhereIn('destionation_account_id', $userAccounts); // Transactions received by the user
+            })
+            ->orderBy('created_at', 'desc')
+            ->take(4)
+            ->get()
+            ->map(function ($transaction) use ($userAccounts) {
+                // Determine if the user is the sender or receiver
+                $isSent = $userAccounts->contains($transaction->account_id);
+
+                // Add the other party's name
+                $transaction->other_party_name = $isSent
+                    ? $transaction->receiverAccount->user->first_name . ' '.$transaction->receiverAccount->user->last_name // Receiver name
+                    : $transaction->senderAccount->user->first_name . ' '. $transaction->senderAccount->user->last_name; // Sender name
+
+                // Add the transaction type dynamically
+                $transaction->type = $isSent ? 'debit' : 'credit';
+                $transaction->date = $transaction->created_at->toIso8601String();
+                return $transaction;
+            });
+
+        return response()->json($transactions);
     }
     public function add(Request $request)
     {
@@ -46,7 +77,7 @@ class TransactionController extends Controller
             'amount' => $request->amount,
             'description' => 'no description'
         ]);
-        $transaction->load(['source','destination']);
+        $transaction->load(['senderAccount','receiverAccount']);
         return response()->json($transaction);
 
     }

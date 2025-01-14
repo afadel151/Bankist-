@@ -100,10 +100,10 @@ const initFilters = () => {
 
 <template>
     <MyLayout>
-        <div class="w-full h-[150px] pt-10 px-[6rem]">
+        <div class="w-full h-[150px] pt-10 px-20">
             <p class="text-6xl font-bold text-gray-600">Transactions history</p>
         </div>
-        <div class="w-full flex flex-col justify-center space-y-10 items-center ">
+        <div class="w-full flex flex-col justify-center space-y-10 items-start px-20 ">
         <AddTrasaction :accounts="props.accounts" />
          <DataTable
                 v-model:filters="filters"
@@ -111,7 +111,7 @@ const initFilters = () => {
                 :value="transactions"
                 paginator
                 :rows="10"
-                class="min-w-[90%] shadow-xl "
+                class="w-full shadow-xl "
                 dataKey="id"
                 filterDisplay="menu"
                 :globalFilterFields="[
@@ -134,13 +134,13 @@ const initFilters = () => {
                 </template>
                 <template #empty> No Transaction found. </template>
                 <Column
-                    field="source"
+                    field="senderAccount"
                     header="Source"
                     sortable
                     style="min-width: 14rem"
                 >
                     <template #body="{ data }">
-                        {{ data.source.number }}
+                        {{ data.sender_account.number }}
                     </template>
                     <template #filter="{ filterModel }">
                         <InputText
@@ -151,13 +151,13 @@ const initFilters = () => {
                     </template>
                 </Column>
                 <Column
-                    field="destination"
+                    field="receiverAccount"
                     header="Destination"
                     sortable
                     style="min-width: 14rem"
                 >
                     <template #body="{ data }">
-                        {{ data.destination.number }}
+                        {{ data.receiver_account.number }}
                     </template>
                     <template #filter="{ filterModel }">
                         <InputText

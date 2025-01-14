@@ -55,9 +55,9 @@ import DropdownLink from '@/Components/DropdownLink.vue';
                   </Link>
                 </li>
                 <li>
-                  <Link :href="route('accounts.saving')"
+                  <Link :href="route('accounts.savings')"
                     class="flex items-center p-3 border-round text-700 transition-colors transition-duration-300 cursor-pointer hover:surface-100"
-                    :class="route().current('accounts.saving') ? 'text-white bg-gray-600' : ''"> 
+                    :class="route().current('accounts.savings') ? 'text-white bg-gray-600' : ''"> 
                       <i class="mr-2 pi pi-save"></i>
                     <span class="font-medium">Saving</span>
                 </Link>

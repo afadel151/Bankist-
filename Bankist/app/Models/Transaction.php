@@ -15,11 +15,13 @@ class Transaction extends Model
         'destionation_account_id',
         'description'
     ];
-    public function source():BelongsTo
+    
+    public function senderAccount()
     {
         return $this->belongsTo(Account::class, 'account_id');
     }
-    public function destination():BelongsTo
+
+    public function receiverAccount()
     {
         return $this->belongsTo(Account::class, 'destionation_account_id');
     }

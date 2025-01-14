@@ -13,7 +13,7 @@ class PaymentController extends Controller
         $cards = Auth::user()->cards;
         $payments = [];
         foreach ($cards as $card) {
-            $payments = array_merge($payments, $card->payments);
+            $payments = array_merge($payments, $card->payments->toArray());
         }
         
         return Inertia::render('Payments');

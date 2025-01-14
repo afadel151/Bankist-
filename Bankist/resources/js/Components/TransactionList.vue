@@ -6,19 +6,18 @@
       <h3 class="text-xl font-semibold text-gray-800">Recent Transactions</h3>
     </div>
 
-    <div>
+    <div class=" flex flex-col justify-start h-full">
       <div
+        v-if="transactions.length"
         v-for="transaction in transactions"
         :key="transaction.id"
         class="flex items-center justify-between py-4 rounded-lg hover:bg-gray-50 transition-colors"
       >
         <div class="flex items-center space-x-4">
           <div
-            :class="[
+            :class="[ 
               'p-2 rounded-full',
-              transaction.type === 'credit'
-                ? 'bg-green-100 text-green-600'
-                : 'bg-red-100 text-red-600',
+              transaction.type === 'credit' ? 'bg-green-100 text-green-600' : 'bg-red-100 text-red-600'
             ]"
           >
             <component
@@ -28,86 +27,70 @@
           </div>
           <div>
             <p class="font-medium text-gray-800">
-              {{ transaction.description }}
+              {{ transaction.type === 'credit' ? 'From' : 'To' }}: {{ transaction.other_party_name }}
             </p>
             <p class="text-sm text-gray-500">
-              {{ formatDate(transaction.date) }}
+              {{ formatDate(new Date(transaction.date)) }}
             </p>
           </div>
         </div>
         <p
-          :class="[
+          :class="[ 
             'font-semibold',
-            transaction.type === 'credit' ? 'text-green-600' : 'text-red-600',
+            transaction.type === 'credit' ? 'text-green-600' : 'text-red-600'
           ]"
         >
-          {{ transaction.type === "credit" ? "+" : "-" }}${{
-            formatNumber(transaction.amount)
-          }}
+          {{ transaction.type === 'credit' ? '+' : '-' }}${{ formatNumber(transaction.amount) }}
         </p>
+      </div>
+
+      <div v-else class="text-center text-gray-500">
+        No transactions done.
       </div>
     </div>
 
     <div class="mt-10 text-center">
-      <BaseButton size="sm" variant="secondary"
-        >View All Transactions</BaseButton
-      >
+      <BaseButton size="sm" variant="secondary">View All Transactions</BaseButton>
     </div>
   </div>
 </template>
-  
-  <script setup lang="ts">
-import { Filter, Search, ArrowDownLeft, ArrowUpRight } from "lucide-vue-next";
+
+<script setup lang="ts">
+import { ArrowDownLeft, ArrowUpRight } from "lucide-vue-next";
 import { format } from "date-fns";
+import { ref, onMounted } from "vue";
+import axios from "axios";
 import BaseButton from "./BaseButton.vue";
 
 interface Transaction {
   id: number;
   description: string;
   amount: number;
-  date: Date;
+  date: string;
   type: "credit" | "debit";
+  other_party_name: string;
 }
 
-const transactions = [
-  {
-    id: 1,
-    description: "Direct Deposit - Employer",
-    amount: 2500.0,
-    date: new Date("2024-03-15"),
-    type: "credit",
-  },
-  {
-    id: 2,
-    description: "Amazon.com",
-    amount: 84.99,
-    date: new Date("2024-03-14"),
-    type: "debit",
-  },
-  {
-    id: 3,
-    description: "Transfer from Savings",
-    amount: 1000.0,
-    date: new Date("2024-03-13"),
-    type: "credit",
-  },
-  {
-    id: 4,
-    description: "Starbucks Coffee",
-    amount: 5.75,
-    date: new Date("2024-03-13"),
-    type: "debit",
-  },
-];
+// Reactive data
+const transactions = ref<Transaction[]>([]);
 
-const formatDate = (date: Date) => {
+// Format functions
+const formatDate = (dateString: string) => {
+  const date = new Date(dateString);
+  if (isNaN(date.getTime())) {
+    return "Invalid Date";
+  }
   return format(date, "MMM d, yyyy");
 };
+const formatNumber = (num: number) => new Intl.NumberFormat("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(num);
 
-const formatNumber = (num: number) => {
-  return new Intl.NumberFormat("en-US", {
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2,
-  }).format(num);
-};
+// Fetch transactions on component mount
+onMounted(async () => {
+  try {
+    const response = await axios.get('/api/transactions/recent-transactions');
+    transactions.value = response.data;
+  } catch (error) {
+    console.error('Failed to fetch transactions:', error);
+  }
+});
 </script>

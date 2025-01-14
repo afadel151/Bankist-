@@ -104,7 +104,10 @@ function formatTimestamp(timestamp) {
 </script>
 <template>
     <MyLayout>
-        <div class="w-full flex flex-col  justify-center  items-center mt-20">
+        <div class="w-full h-[150px] pt-10 px-20">
+            <p class="text-6xl font-bold text-gray-600">Loans history</p>
+        </div>
+        <div class="w-full flex flex-col   space-y-5 justify-center  items-start px-20 ">
             <AddLoan />
         <DataTable
                 v-model:filters="filters"
@@ -116,6 +119,7 @@ function formatTimestamp(timestamp) {
                 :globalFilterFields="[
                     'name',
                 ]"
+                class="w-full"
             >
                 <template #header>
                     <div class="flex justify-between">

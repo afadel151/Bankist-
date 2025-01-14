@@ -18,6 +18,7 @@ use Inertia\Inertia;
 Route::prefix('/api')->group(function (){
     Route::prefix('transactions')->group(function(){
         Route::post('add', [TransactionController::class, 'add'])->name('transactions.add');
+        Route::get('/recent-transactions',[TransactionController::class, 'getRecentTransactions']);
     });
     Route::prefix('payments')->group(function(){
         Route::post('add',[PaymentController::class, 'add']);
