@@ -23,6 +23,10 @@
           <l-popup>
             <strong>ATM Machine</strong><br />
             Location: {{ machine.latitude }}, {{ machine.longitude }}
+            <br>
+            <span class="text-green-500">Actif</span>
+            <br>
+            <span class="text-blue-500">{{ Math.floor(Math.random() * 10) }} persons on the line</span>
           </l-popup>
         </l-marker>
   

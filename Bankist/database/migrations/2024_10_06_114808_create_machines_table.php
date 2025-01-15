@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('machines', function (Blueprint $table) {
             $table->id();
             $table->foreignId('branch_id')->constrained('branches');
-            $table->string('city');
-            $table->string('street');
+            $table->float('longitude');
+            $table->float('latitude');
             $table->timestamps();
         });
     }
