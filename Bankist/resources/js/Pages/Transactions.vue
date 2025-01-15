@@ -174,7 +174,7 @@ const initFilters = () => {
                     style="min-width: 14rem"
                 >
                     <template #body="{ data }">
-                        {{ data.amount }}
+                        ${{ data.amount }}
                     </template>
                     <template #filter="{ filterModel }">
                         <InputText

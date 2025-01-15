@@ -1,14 +1,15 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Carbon;
 use App\Models\Account;
 use App\Models\Transaction;
+use App\Models\User;
 use Hash;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
-use Illuminate\Validation\Rules;
+use PDF;
 class TransactionController extends Controller
 {
     public function index()
@@ -19,6 +20,35 @@ class TransactionController extends Controller
         return Inertia::render('Transactions',['transactions'=>$transactions,
                                                                     'accounts' => $user_accounts
                                                                 ]);
+    }
+    public function downloadPDF()
+    {
+        // Exemple de données de transaction
+        $accounts = User::find(Auth::user()->id)->accounts->pluck('id')->toArray();
+
+        $transactions = Transaction::whereIn('account_id',$accounts)->orWhereIn('destionation_account_id',$accounts)->get()->load(['senderAccount','receiverAccount']);
+        $transactions->map(function ($transaction) use($accounts){
+            if (in_array($transaction->account_id,$accounts)) {
+                $transaction->type = 'Sent';
+                $destination = User::find(Account::find($transaction->destionation_account_id)->user_id);
+                $transaction->other_name = $destination->first_name . $destination->last_name;
+                $transaction->other_account_number = Account::find($transaction->destionation_account_id)->number;
+                $transaction->date = $transaction->created_at->toDateString();
+            }else{
+                $transaction->type = 'Received';
+                $destination = User::find(Account::find($transaction->account_id)->user_id);
+                $transaction->other_name = $destination->first_name . $destination->last_name;
+                $transaction->other_account_number = Account::find($transaction->account_id)->number;
+                $transaction->date = $transaction->created_at->toDateString();
+            }
+        });
+        
+
+        // Charger la vue et passer les données
+        $pdf = PDF::loadView('transactions.form', compact('transactions'));
+
+        // Télécharger le PDF
+        return $pdf->download('formulaire_transactions.pdf');
     }
     public function getRecentTransactions()
     {

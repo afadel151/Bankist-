@@ -47,6 +47,7 @@ Route::middleware('auth')->group(function () {
     Route::prefix('payments')->group(function (){
         Route::get('/', [PaymentController::class, 'index'])->name('payments.index');
     });
+    Route::get('/download-transactions-pdf', [TransactionController::class, 'downloadPDF'])->name('transactions.pdf');
     Route::prefix('cards')->group(function (){
         Route::get('/', [CardController::class, 'get_cards'])->name('cards.all');
         Route::get('/{id}/settings', [CardController::class, 'settings'])->name('cards.settings');
