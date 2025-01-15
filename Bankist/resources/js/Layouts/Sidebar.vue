@@ -99,7 +99,14 @@ import DropdownLink from '@/Components/DropdownLink.vue';
                 <span class="font-medium">Transactions</span>
             </Link>
             </li>
-            
+            <li>
+              <Link :href="route('map')"
+                    class="flex items-center p-3 border-round text-700 transition-colors transition-duration-300 cursor-pointer hover:surface-100"
+                    :class="route().current('map') ? 'text-white bg-gray-600' : ''">
+                    <i class="mr-2 pi pi-map"></i>
+                <span class="font-medium">Machines on map</span>
+            </Link>
+            </li>
             <li>
               <a v-ripple
                 class="flex items-center p-3 p-ripple border-round text-700 transition-colors transition-duration-150 cursor-pointer hover:surface-100">

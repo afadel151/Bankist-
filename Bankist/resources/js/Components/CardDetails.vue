@@ -1,6 +1,7 @@
 <script setup>
 import { CreditCard, Lock, Settings } from 'lucide-vue-next'
 import BaseButton from './BaseButton.vue';
+import { useForm } from '@inertiajs/vue3';
 
 const props = defineProps({
   card: Object
@@ -14,6 +15,13 @@ const formatDate = (inputDate) => {
   const month = String(date.getMonth() + 1).padStart(2, '0'); // Zero-padded month
   return `${year}/${month}`;
 };
+const form = useForm({
+  card_id : props.card.id
+})
+function lock()
+{
+  form.post(route('cards.lock'));
+}
 const formatNumber = (num) => {
   return new Intl.NumberFormat('en-US', {
     minimumFractionDigits: 2,
@@ -67,12 +75,12 @@ const formatNumber = (num) => {
       </div>
       <div class="flex justify-between items-center">
         <p class="text-gray-600">Status</p>
-        <span class="px-2 py-1 bg-green-100 text-green-700 rounded-full text-sm">Active</span>
+        <span :class="props.card.locked ? 'text-red-700 bg-red-100' : ' text-green-700 bg-green-100'" class="px-2 py-1   rounded-full text-sm">{{props.card.locked ? 'Locked' : 'Actif'}}</span>
       </div>
     </div>
 
     <div class="mt-6 flex items-center space-x-3">
-      <BaseButton variant="secondary" size="sm">
+      <BaseButton variant="secondary" size="sm" @click="lock">
         <Lock class="w-4 h-4 mr-2" />
         Lock Card
       </BaseButton>

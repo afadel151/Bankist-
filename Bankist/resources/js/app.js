@@ -3,6 +3,8 @@ import './bootstrap';
 import Aura from '@primevue/themes/aura';
 import 'primeicons/primeicons.css'
 import PrimeVue from 'primevue/config';
+import 'leaflet/dist/leaflet.css'
+import L from 'leaflet'
 import { createInertiaApp } from '@inertiajs/vue3';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import { createApp, h } from 'vue';

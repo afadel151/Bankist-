@@ -3,6 +3,7 @@
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\CardController;
 use App\Http\Controllers\LoanController;
+use App\Http\Controllers\MachineController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TransactionController;
@@ -41,11 +42,15 @@ Route::middleware('auth')->group(function () {
         Route::get('/',  [LoanController::class, 'index'])->name('loans.index');
         Route::post('/',  [LoanController::class, 'request'])->name('loans.request');
     });
+    Route::get('/map',[MachineController::class, 'map'])->name('map');
+    Route::get('/map/machines',[MachineController::class, 'machines']);
     Route::prefix('payments')->group(function (){
         Route::get('/', [PaymentController::class, 'index'])->name('payments.index');
     });
     Route::prefix('cards')->group(function (){
+        Route::get('/', [CardController::class, 'get_cards'])->name('cards.all');
         Route::get('/{id}/settings', [CardController::class, 'settings'])->name('cards.settings');
+        Route::post('/lock', [CardController::class, 'lock'])->name('cards.lock');
     });
     Route::prefix('transactions')->group(function (){
         Route::get('/', [TransactionController::class, 'index'])->name('transactions.index');

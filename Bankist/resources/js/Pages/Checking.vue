@@ -26,9 +26,6 @@ const props = defineProps({
                             <TransactionList />
                         </div>
 
-                     
-
-
                     </div>
                 </div>
             </div>
