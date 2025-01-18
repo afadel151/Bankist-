@@ -27,6 +27,8 @@ class LoanController extends Controller
             'status' => 'waiting',
             'loan_type' => $request->type,
         ]);
-        return redirect()->route('loans.index');
+        return $this->index();
+        // return redirect()->route('loans.index');
+
     }
 }

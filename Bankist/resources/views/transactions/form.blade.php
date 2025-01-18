@@ -26,6 +26,8 @@
 <body>
     <h1>Formulaire de Transactions</h1>
     <p>Date : {{ date('d/m/Y') }}</p>
+    @if (!$empty)
+        
 
     <table>
         <thead>
@@ -35,7 +37,7 @@
                 <th>Numero de Compte</th>
                 <th>Montant (€)</th>
                 <th>Date</th>
-            </tr>
+            </tr>   
         </thead>
         <tbody>
             @foreach($transactions as $transaction)
@@ -49,5 +51,10 @@
             @endforeach
         </tbody>
     </table>
+    @else
+
+    No transaction yet
+        
+    @endif
 </body>
 </html>

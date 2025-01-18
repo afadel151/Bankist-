@@ -79,7 +79,13 @@ class AccountController extends Controller
     }
     public function loan()
     {
-        return Inertia::render('Loan');
+
+         $account = Auth::user()->accounts->where('account_type','loan')->first();
+        $account->load('card');
+        $account->card->load(['account','user']);
+        return Inertia::render('Loan',[
+            'account' => $account
+        ]);
         
     }
     private function getSameDayNextYear()

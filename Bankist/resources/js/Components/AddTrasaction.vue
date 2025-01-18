@@ -1,6 +1,6 @@
 <script setup>
 import { useForm } from '@inertiajs/vue3';
-import { Button, Dialog, InputNumber, InputText, Select } from 'primevue';
+import { Button, Dialog, InputNumber, InputText, Select, useToast } from 'primevue';
 import { ref, computed } from 'vue';
 import InputError from './InputError.vue';
 import axios from 'axios';
@@ -13,6 +13,7 @@ const form = useForm({
     destination: '',
     amount: ''
 });
+const toast = useToast();
 const props = defineProps({
     accounts: Array
 });
@@ -34,7 +35,16 @@ const handleAccountChange = (value) => {
 const submit = async () => {
     try {
         const response = await axios.post(route("transactions.add"), form);
-        console.log(response.data);
+        if (response.status == 200) {
+            toast.add({ severity: 'primary', summary: 'Info', detail: 'Money transfered successfully', life: 3000 });
+            emit('add_transaction',response.data);
+        }else if(response.status == 201){
+            toast.add({ severity: 'warn', summary: 'Info', detail: 'Server Error, try again', life: 3000 });
+        }else if(response.status == 202){
+            toast.add({ severity: 'info', summary: 'Info', detail: 'Error in account number', life: 3000 });
+        }else if(response.status == 203){
+            toast.add({ severity: 'danger', summary: 'Info', detail: 'Insufficient balance', life: 3000 });
+        }
         form.reset("password");
         visible.value = false;
     } catch (error) {
@@ -45,11 +55,13 @@ const submit = async () => {
         }
     }
 };
+
 </script>
 
 
 
 <template>
+    
     <Button label="Add transaction" icon="pi pi-plus" @click="visible = true" />
     <Dialog v-model:visible="visible" modal header="Transaction" :style="{ width: '45rem' }">
         <span class="text-surface-500 dark:text-surface-400 block mb-8">Make a transaction to another account.</span>

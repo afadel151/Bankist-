@@ -11,14 +11,10 @@
     </button>
   </template>
   
-  <script setup lang="ts">
-  interface Props {
-    variant?: 'primary' | 'secondary'
-    size?: 'sm' | 'md' | 'lg'
-    className?: string
-  }
+  <script setup>
+
   
-  const props = withDefaults(defineProps<Props>(), {
+  const props = defineProps( {
     variant: 'primary',
     size: 'md',
     className: ''
@@ -34,4 +30,5 @@
     md: 'px-6 py-3 text-base',
     lg: 'px-8 py-4 text-lg'
   }
+
   </script>

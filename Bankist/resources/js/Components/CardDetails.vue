@@ -1,7 +1,8 @@
 <script setup>
-import { CreditCard, Lock, Settings } from 'lucide-vue-next'
+import { CreditCard, Lock, Settings, Unlock } from 'lucide-vue-next'
 import BaseButton from './BaseButton.vue';
 import { useForm } from '@inertiajs/vue3';
+
 
 const props = defineProps({
   card: Object
@@ -16,10 +17,9 @@ const formatDate = (inputDate) => {
   return `${year}/${month}`;
 };
 const form = useForm({
-  card_id : props.card.id
+  card_id: props.card.id
 })
-function lock()
-{
+function lock() {
   form.post(route('cards.lock'));
 }
 const formatNumber = (num) => {
@@ -31,63 +31,70 @@ const formatNumber = (num) => {
 </script>
 <template>
   <div class="bg-white rounded-xl shadow-sm p-6">
-    <h3 class="text-lg font-semibold text-gray-800 mb-6">Linked Cards</h3>
+    <h3 class="text-lg font-semibold text-gray-800 mb-6">Linked Card</h3>
+    <div class="flex w-full h-full justify-around">
 
-    <div class=" h-56 w-full max-w-sm mx-auto mb-6">
-      <div class="relative inset-0 overflow-hidden  bg-green-500 rounded-xl p-6 text-white shadow-lg">
-        <div class="absolute h-40 w-40 top-0 -right-10 rounded-full bg-slate-200  opacity-20">
-        </div>
-        <div class="absolute h-20 w-20 bottom-0 -right-10 rounded-full bg-slate-200  opacity-20">
-        </div>
-        <div class="flex justify-between items-start">
-          <div>
-            <p class="text-sm opacity-80">Current Balance</p>
-            <p class="text-2xl font-semibold mt-1">${{ formatNumber(card.account.balance) }}</p>
+
+      <div class=" h-56  w-[40%] space-x-10  mb-6">
+        <div class="relative inset-0 overflow-hidden  bg-green-500 rounded-xl p-6 text-white shadow-lg">
+          <div class="absolute h-40 w-40 top-0 -right-10 rounded-full bg-slate-200  opacity-20">
           </div>
-          <img src="/imgs/icon.png" class="w-10" alt="">
-        </div>
-
-        <div class="mt-8">
-          <p class="font-medium tracking-widest"> {{ props.card.card_number }}</p>
-        </div>
-
-        <div class="mt-6 flex justify-between items-center">
-          <div>
-            <p class="text-xs opacity-80">Card Holder</p>
-            <p class="font-medium">{{ card.user.last_name }} {{ card.user.first_name }}</p>
+          <div class="absolute h-20 w-20 bottom-0 -right-10 rounded-full bg-slate-200  opacity-20">
           </div>
-          <div>
-            <p class="text-xs opacity-80">Expires</p>
-            <p class="font-medium">{{ formatDate(card.expiry_date) }}</p>
+          <div class="flex justify-between items-start">
+            <div>
+              <p class="text-sm opacity-80">Current Balance</p>
+              <p class="text-2xl font-semibold mt-1">${{ formatNumber(card.account.balance) }}</p>
+            </div>
+            <img src="/imgs/icon.png" class="w-10" alt="">
+          </div>
+
+          <div class="mt-8">
+            <p class="font-medium tracking-widest"> {{ props.card.card_number }}</p>
+          </div>
+
+          <div class="mt-6 flex justify-between items-center">
+            <div>
+              <p class="text-xs opacity-80">Card Holder</p>
+              <p class="font-medium">{{ card.user.last_name }} {{ card.user.first_name }}</p>
+            </div>
+            <div>
+              <p class="text-xs opacity-80">Expires</p>
+              <p class="font-medium">{{ formatDate(card.expiry_date) }}</p>
+            </div>
           </div>
         </div>
       </div>
-    </div>
 
-    <div class="space-y-4">
-      <div class="flex justify-between items-center">
-        <p class="text-gray-600">Card Type</p>
-        <p class="font-medium text-gray-800">Visa Debit</p>
-      </div>
-      <div class="flex justify-between items-center">
-        <p class="text-gray-600">Card Lemit</p>
-        <p class="font-medium text-gray-800">${{ card.credit_limit }}</p>
-      </div>
-      <div class="flex justify-between items-center">
-        <p class="text-gray-600">Status</p>
-        <span :class="props.card.locked ? 'text-red-700 bg-red-100' : ' text-green-700 bg-green-100'" class="px-2 py-1   rounded-full text-sm">{{props.card.locked ? 'Locked' : 'Actif'}}</span>
-      </div>
-    </div>
+      <div class=" w-[40%] flex flex-col justify-between mb-6 ">
+        <div class="space-y-4">
+          <div class="flex justify-between items-center">
+            <p class="text-gray-600">Card Type</p>
+            <p class="font-medium text-gray-800">Visa Debit</p>
+          </div>
+          <div class="flex justify-between items-center">
+            <p class="text-gray-600">Card Lemit</p>
+            <p class="font-medium text-gray-800">${{ card.credit_limit }}</p>
+          </div>
+          <div class="flex justify-between items-center">
+            <p class="text-gray-600">Status</p>
+            <span :class="props.card.locked ? 'text-red-700 bg-red-100' : ' text-green-700 bg-green-100'"
+              class="px-2 py-1   rounded-full text-sm">{{ props.card.locked ? 'Locked' : 'Actif' }}</span>
+          </div>
+        </div>
 
-    <div class="mt-6 flex items-center space-x-3">
-      <BaseButton variant="secondary" size="sm" @click="lock">
-        <Lock class="w-4 h-4 mr-2" />
-        Lock Card
-      </BaseButton>
-      <BaseButton variant="secondary" size="sm">
-        <Settings class="w-4 h-4 mr-2" />
-        Card Settings
-      </BaseButton>
+        <div class=" flex items-center  self-end space-x-3">
+          <BaseButton variant="secondary" size="sm" @click="lock">
+            <Lock v-if="!card.locked" class="w-4  mr-2" />
+            <Unlock v-else class="w-4  mr-2" />
+            {{ card.locked ? 'Unlock card' : 'Lock card' }}
+          </BaseButton>
+          <BaseButton variant="secondary" size="sm">
+            <Settings class="w-4  mr-2" />
+            Card Settings
+          </BaseButton>
+        </div>
+      </div>
     </div>
   </div>
 </template>

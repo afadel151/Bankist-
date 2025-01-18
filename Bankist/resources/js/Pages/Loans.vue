@@ -3,7 +3,7 @@ import MyLayout from '@/Layouts/MyLayout.vue';
 const props = defineProps({
     loans: Array
 })
-console.log(props.loans);
+
 import { FilterMatchMode, FilterOperator } from "@primevue/core/api";
 import axios from "axios";
 import { DataTable } from "primevue";

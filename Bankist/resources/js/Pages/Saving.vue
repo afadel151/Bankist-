@@ -18,12 +18,6 @@ function create()
 {
     form.post(route('accounts.create'))
 }
-const accountData = {
-    balance: 12458.96,
-    cardHolder: 'JOHN DOE',
-    cardExpiry: '12/25',
-    dailyLimit: 5000.00
-}
 
 const props = defineProps({
     account: Object
@@ -41,7 +35,7 @@ const props = defineProps({
 
                         <div class="lg:col-span-2 space-y-6">
                             <SpendingChart />
-                            <TransactionList />
+                            <TransactionList :account_id="props.account.id" />
                         </div>
 
 

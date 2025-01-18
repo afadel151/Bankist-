@@ -11,7 +11,7 @@
         v-if="transactions.length"
         v-for="transaction in transactions"
         :key="transaction.id"
-        class="flex items-center justify-between py-4 rounded-lg hover:bg-gray-50 transition-colors"
+        class="flex items-center px-5 justify-between py-4 rounded-lg hover:bg-gray-50 transition-colors"
       >
         <div class="flex items-center space-x-4">
           <div
@@ -30,7 +30,7 @@
               {{ transaction.type === 'credit' ? 'From' : 'To' }}: {{ transaction.other_party_name }}
             </p>
             <p class="text-sm text-gray-500">
-              {{ formatDate(new Date(transaction.date)) }}
+              {{ formatDate( new Date(transaction.date)) }}
             </p>
           </div>
         </div>
@@ -50,7 +50,10 @@
     </div>
 
     <div class="mt-10 text-center">
-      <BaseButton size="sm" variant="secondary">View All Transactions</BaseButton>
+      <Link :href="route('transactions.index')">
+      
+        <BaseButton size="sm" variant="secondary">View All Transactions</BaseButton>
+    </Link>
     </div>
   </div>
 </template>
@@ -60,6 +63,8 @@ import { ArrowDownLeft, ArrowUpRight } from "lucide-vue-next";
 import { format } from "date-fns";
 import { ref, onMounted } from "vue";
 import axios from "axios";
+
+import { Link } from "@inertiajs/vue3";
 import BaseButton from "./BaseButton.vue";
 
 interface Transaction {
@@ -83,11 +88,17 @@ const formatDate = (dateString: string) => {
   return format(date, "MMM d, yyyy");
 };
 const formatNumber = (num: number) => new Intl.NumberFormat("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(num);
-
+const props = defineProps({
+  account_id: Number
+})
 // Fetch transactions on component mount
 onMounted(async () => {
   try {
-    const response = await axios.get('/api/transactions/recent-transactions');
+    const response = await axios.get('/api/transactions/recent-transactions',{
+      params:{
+        account_id : props.account_id
+      }
+    });
     transactions.value = response.data;
   } catch (error) {
     console.error('Failed to fetch transactions:', error);

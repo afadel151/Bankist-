@@ -16,6 +16,8 @@ const form = useForm({
 
 function create()
 {
+    console.log('create');
+    
     form.post(route('accounts.create'))
 }
 
@@ -35,7 +37,7 @@ const props = defineProps({
 
                         <div class="lg:col-span-2 space-y-6">
                             <SpendingChart />
-                            <TransactionList />
+                            <TransactionList :account_id="props.account.id" />
                         </div>
 
 

@@ -13,6 +13,7 @@ import VueApexCharts from "vue3-apexcharts";
 import AnimateOnScroll from 'primevue/animateonscroll';
 import Ripple from 'primevue/ripple';
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
+import ToastService from 'primevue/toastservice';
 import StyleClass from 'primevue/styleclass';
 createInertiaApp({
     title: (title) => `${title} - ${appName}`,
@@ -36,6 +37,7 @@ createInertiaApp({
                     }
                 },
             })
+            .use(ToastService)
             .directive('animateonscroll', AnimateOnScroll)
             .directive('ripple', Ripple)
             .directive('styleclass', StyleClass)

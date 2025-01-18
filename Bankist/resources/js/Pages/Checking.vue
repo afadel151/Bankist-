@@ -23,7 +23,7 @@ const props = defineProps({
 
                         <div class="lg:col-span-2 space-y-6">
                             <SpendingChart />
-                            <TransactionList />
+                            <TransactionList :account_id="props.account.id" />
                         </div>
 
                     </div>

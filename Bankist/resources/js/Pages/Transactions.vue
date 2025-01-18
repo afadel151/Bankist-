@@ -1,7 +1,7 @@
 <script setup>
 import { FilterMatchMode, FilterOperator } from "@primevue/core/api";
 import axios from "axios";
-import { DataTable } from "primevue";
+import { DataTable, Toast } from "primevue";
 import {IconField} from "primevue";
 import {InputIcon} from "primevue";
 import {Button} from "primevue";
@@ -11,7 +11,8 @@ import {InputText} from "primevue";
 import { ref, onMounted } from "vue";
 import MyLayout from '@/Layouts/MyLayout.vue';
 import AddTrasaction from "@/Components/AddTrasaction.vue";
-import { usePage } from "@inertiajs/vue3";
+import { Link, usePage } from "@inertiajs/vue3";
+
 
 
 
@@ -96,15 +97,22 @@ const initFilters = () => {
     };
 };
 
+
 </script>
 
 <template>
     <MyLayout>
+        <Toast/>
         <div class="w-full h-[150px] pt-10 px-20">
             <p class="text-6xl font-bold text-gray-600">Transactions history</p>
         </div>
         <div class="w-full flex flex-col justify-center space-y-10 items-start px-20 ">
-        <AddTrasaction :accounts="props.accounts" />
+        <div class="items-center flex space-x-3">
+            <AddTrasaction :accounts="props.accounts" />
+            <a :href="route('transactions.pdf')">
+                <Button icon="pi pi-save" label="Export transactions" />
+            </a>
+        </div>
          <DataTable
                 v-model:filters="filters"
                 v-model:selection="selectedTasks"

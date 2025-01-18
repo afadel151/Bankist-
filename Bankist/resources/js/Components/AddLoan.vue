@@ -20,10 +20,11 @@ const types = ref([
     'personal',
     'business'
 ]);
-const submit = async () => {
+const submit =  () => {
     form.post(route('loans.request'), {
         onFinish: () => form.reset('password'),
     });
+    visible.value = false
 };
 
 </script>
